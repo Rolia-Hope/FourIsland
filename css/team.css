@@ -1,0 +1,22 @@
+* {
+    background-color: grey;
+ }
+
+.incubators {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    border: 2px solid black; 
+    border-radius: 15px;    
+    padding: 110px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.egg-slot {
+    width: 200px;
+    height: 250px;
+    border: 2px solid black;
+    gap: 10px; 
+    margin: 0 5px;
+}
