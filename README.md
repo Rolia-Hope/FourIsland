@@ -1,6 +1,15 @@
 # FourIsland
 A 100% Idle game about egg hatching with insane probabilities
 
+# State of the game
+
+Bad. But it's out.
+Clone / Download the repro. Do a local server (the easiest way is with python : python -m http.server)
+No retro sprite included. Otherwise the repro would be too big, too bad.
+Info : Legs are not available atm. Baby Pokemon breeding is broken. Avoid that atm.
+Otherwise everything basic should work.
+
+
 
 Here're the goals and ideas : 
 
