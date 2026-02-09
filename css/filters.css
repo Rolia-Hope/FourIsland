@@ -1,0 +1,382 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #2a2a2a;
+	color: #fff;
+	font-family: Arial, sans-serif;
+}
+
+header {
+	background-color: #1a1a1a;
+	padding: 20px;
+	border-bottom: 3px solid #ff6b6b;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header h1 {
+	background-color: transparent;
+	font-size: 2.5em;
+}
+
+header nav {
+	display: flex;
+	gap: 15px;
+	background-color: transparent;
+}
+
+header nav a {
+	background-color: #ff6b6b;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+header nav a:hover {
+	background-color: #ff5252;
+}
+
+main {
+	padding: 40px 20px;
+}
+
+.filters-container {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.filters-controls {
+	background-color: transparent;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.filters-controls h2 {
+	background-color: transparent;
+	color: #ff6b6b;
+	font-size: 2em;
+}
+
+/* Buttons */
+.btn {
+	padding: 12px 24px;
+	border: none;
+	border-radius: 5px;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn-primary {
+	background-color: #ff6b6b;
+	color: #fff;
+}
+
+.btn-primary:hover {
+	background-color: #ff5252;
+}
+
+.btn-secondary {
+	background-color: #555;
+	color: #fff;
+}
+
+.btn-secondary:hover {
+	background-color: #666;
+}
+
+.btn-danger {
+	background-color: #d32f2f;
+	color: #fff;
+}
+
+.btn-danger:hover {
+	background-color: #b71c1c;
+}
+
+/* Filters List */
+.filters-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.filter-card {
+	background-color: #1a1a1a;
+	border: 2px solid #555;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.filter-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+	background-color: transparent;
+}
+
+.filter-title {
+	background-color: transparent;
+	color: #ff6b6b;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.filter-actions {
+	display: flex;
+	gap: 10px;
+	background-color: transparent;
+}
+
+.filter-actions button {
+	padding: 8px 16px;
+	font-size: 0.9em;
+}
+
+.filter-criteria {
+	background-color: #2a2a2a;
+	padding: 15px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr auto;
+	gap: 15px;
+	align-items: center;
+}
+
+.criteria-input {
+	background-color: #3a3a3a;
+	color: #fff;
+	border: 1px solid #555;
+	padding: 8px 12px;
+	border-radius: 5px;
+	font-size: 0.95em;
+}
+
+.criteria-input:focus {
+	outline: none;
+	border-color: #ff6b6b;
+	box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
+}
+
+.criteria-input option {
+	background-color: #3a3a3a;
+	color: #fff;
+}
+
+.criteria-label {
+	background-color: transparent;
+	font-size: 0.9em;
+	color: #ccc;
+}
+
+.remove-criteria {
+	padding: 6px 12px;
+	font-size: 0.85em;
+}
+
+/* Modal */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.modal-content {
+	background-color: #2a2a2a;
+	margin: 5% auto;
+	padding: 30px;
+	border: 3px solid #ff6b6b;
+	border-radius: 10px;
+	width: 90%;
+	max-width: 700px;
+	max-height: 80vh;
+	overflow-y: auto;
+	position: relative;
+}
+
+.modal-content h2 {
+	background-color: transparent;
+	color: #ff6b6b;
+	margin-bottom: 20px;
+}
+
+.close {
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	font-size: 2em;
+	font-weight: bold;
+	color: #ff6b6b;
+	cursor: pointer;
+	background-color: transparent;
+	transition: color 0.3s;
+}
+
+.close:hover {
+	color: #ff5252;
+}
+
+/* Filter Builder */
+.filter-builder {
+	background-color: transparent;
+}
+
+.criteria-list {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin-bottom: 20px;
+	background-color: transparent;
+}
+
+.criteria-input-group {
+	background-color: #3a3a3a;
+	padding: 15px;
+	border-radius: 8px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr auto;
+	gap: 12px;
+	align-items: center;
+}
+
+.criteria-input-group label {
+	background-color: transparent;
+	font-size: 0.9em;
+	color: #ccc;
+	grid-column: 1;
+}
+
+.criteria-input-group select,
+.criteria-input-group input {
+	background-color: #2a2a2a;
+	color: #fff;
+	border: 1px solid #555;
+	padding: 8px 12px;
+	border-radius: 5px;
+	font-size: 0.95em;
+}
+
+/* Retro sprite checkbox list */
+.criteria-retro-options {
+	grid-column: 2 / span 2;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 12px;
+	padding: 6px 10px;
+	background-color: #2a2a2a;
+	border: 1px solid #555;
+	border-radius: 5px;
+	max-height: 120px;
+	overflow-y: auto;
+}
+
+.criteria-retro-options label {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background-color: transparent;
+	color: #eee;
+	font-size: 0.85em;
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+
+.criteria-retro-options input[type="checkbox"] {
+	accent-color: #ff6b6b;
+}
+
+.criteria-input-group select:focus,
+.criteria-input-group input:focus {
+	outline: none;
+	border-color: #ff6b6b;
+	box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
+}
+
+.criteria-input-group select option {
+	background-color: #3a3a3a;
+	color: #fff;
+}
+
+.criteria-input-group button {
+	justify-self: end;
+}
+
+.modal-actions {
+	display: flex;
+	gap: 15px;
+	justify-content: flex-end;
+	margin-top: 30px;
+	background-color: transparent;
+}
+
+.modal-actions button {
+	padding: 12px 30px;
+	font-size: 1em;
+}
+
+/* Empty State */
+.empty-message {
+	background-color: #1a1a1a;
+	border: 2px dashed #555;
+	border-radius: 10px;
+	padding: 40px;
+	text-align: center;
+	color: #999;
+	font-size: 1.1em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	header {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+
+	.criteria-input-group {
+		grid-template-columns: 1fr;
+	}
+
+	.criteria-retro-options {
+		grid-column: 1 / -1;
+	}
+
+	.criteria-input-group button {
+		justify-self: start;
+	}
+
+	.modal-content {
+		width: 95%;
+		margin: 20% auto;
+		padding: 20px;
+	}
+}

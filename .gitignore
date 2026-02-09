@@ -1,0 +1,4 @@
+sprites/pokemon
+!sprites/pokemon
+sprites/pokemon/*
+!sprites/pokemon/base

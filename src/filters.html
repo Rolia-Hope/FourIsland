@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../css/filters.css" />
+    <title>Filters - Four Island</title>
+    <script src="../js/balance.js"></script>
+    <script src="../js/pokemon_db.js"></script>
+    <script src="../js/retro.js"></script>
+    <script src="../js/save.js"></script>
+    <script src="../js/filters.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Pokemon Filters</h1>
+      <nav>
+        <a href="../index.html">Incubator</a>
+        <a href="pc.html">PC</a>
+        <a href="store.html">Store</a>
+        <a href="daycare.html">Daycare</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="filters-container">
+        <div class="filters-controls">
+          <h2>Your Filters</h2>
+          <button id="addFilterBtn" class="btn btn-primary">+ Add Filter</button>
+        </div>
+
+        <div id="filtersList" class="filters-list">
+          <!-- Filters will be rendered here -->
+        </div>
+
+        <!-- Filter Creation Modal -->
+        <div id="filterModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Filter</h2>
+            
+            <div class="filter-builder">
+              <div id="criteriaList" class="criteria-list">
+                <!-- Criteria will be added here -->
+              </div>
+
+              <button id="addCriteriaBtn" class="btn btn-secondary">+ Add Criteria</button>
+
+              <div class="modal-actions">
+                <button id="saveCriteriaBtn" class="btn btn-primary">Save Filter</button>
+                <button id="cancelFilterBtn" class="btn btn-secondary">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

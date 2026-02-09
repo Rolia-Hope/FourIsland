@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../css/store.css" />
+    <title>Store - Four Island</title>
+    <script src="../js/balance.js"></script>
+    <script src="../js/daycare_balance.js"></script>
+    <script src="../js/pokemon_db.js"></script>
+    <script src="../js/save.js"></script>
+    <script src="../js/store.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Store</h1>
+      <nav>
+        <a href="../index.html">Incubator</a>
+        <a href="pc.html">PC</a>
+        <a href="filters.html">Filters</a>
+        <a href="daycare.html">Daycare</a>
+      </nav>
+    </header>
+    
+    <main>
+      <div class="currency-display">
+        <h2>Pokedollars: <span id="pokedollarsDisplay">0</span> ₽</h2>
+      </div>
+
+      <div class="store-container">
+        <h2>Upgrades</h2>
+        
+        <div class="upgrades-grid">
+          <!-- Egg Steps Boost -->
+          <div class="upgrade-card" id="upgrade-eggStepsBoost">
+            <h3>Egg Steps Boost</h3>
+            <p class="upgrade-description">Increases egg steps gained per tick</p>
+            <p class="upgrade-level">Level 0</p>
+            <p class="upgrade-bonus">+0 egg steps per tick</p>
+            <button class="btn btn-primary buy-button">Buy (100 ₽)</button>
+          </div>
+          
+          <!-- Tick Speed Boost -->
+          <div class="upgrade-card" id="upgrade-tickSpeedBoost">
+            <h3>Tick Speed Boost</h3>
+            <p class="upgrade-description">Reduces time between ticks</p>
+            <p class="upgrade-level">Level 0</p>
+            <p class="upgrade-bonus">-0ms tick interval</p>
+            <button class="btn btn-primary buy-button">Buy (150 ₽)</button>
+          </div>
+
+          <!-- Egg Speed Boost (Daycare) -->
+          <div class="upgrade-card" id="upgrade-eggSpeedBoost">
+            <h3>Breeding Speed</h3>
+            <p class="upgrade-description">Make eggs generate faster in the daycare</p>
+            <p class="upgrade-level">Level 0</p>
+            <p class="upgrade-bonus">0% faster</p>
+            <button class="btn btn-primary buy-button">Buy (150 ₽)</button>
+          </div>
+
+          <!-- Egg Capacity Boost (Daycare) -->
+          <div class="upgrade-card" id="upgrade-eggCapacityBoost">
+            <h3>Egg Capacity</h3>
+            <p class="upgrade-description">Increase max eggs in daycare storage</p>
+            <p class="upgrade-level">Level 0</p>
+            <p class="upgrade-bonus">+0 slots</p>
+            <button class="btn btn-primary buy-button">Buy (200 ₽)</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

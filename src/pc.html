@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../css/pc.css" />
+    <title>PC - Four Island</title>
+    <script src="../js/balance.js"></script>
+    <script src="../js/daycare_balance.js"></script>
+    <script src="../js/pokemon_db.js"></script>
+    <script src="../js/retro.js"></script>
+    <script src="../js/save.js"></script>
+    <script src="../js/daycare.js"></script>
+    <script src="../js/evolution.js"></script>
+    <script src="../js/pc.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>PC - Four Island</h1>
+      <nav>
+        <a href="../index.html">Incubator</a>
+        <a href="filters.html">Filters</a>
+        <a href="store.html">Store</a>
+        <a href="daycare.html">Daycare</a>
+      </nav>
+    </header>
+    <main>
+      <div class="pc-container">
+        <h2>Your Pokemon Collection</h2>
+        <div class="pc-boxes-container" id="pcBoxesContainer">
+          <!-- Pokemon boxes will be generated here -->
+        </div>
+      </div>
+
+      <!-- Pokemon Details Modal -->
+      <div class="modal" id="pokemonModal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="pokemon-details">
+			<div class="pokemon-sprite-frame">
+				<img id="modalSprite" class="pokemon-sprite" alt="Pokemon" />
+			</div>
+            <div class="pokemon-info">
+              <h3 id="modalName"></h3>
+              <p id="modalSpecies"></p>
+              <p id="modalGender"></p>
+              <p id="modalNature"></p>
+              <p id="modalRetro"></p>
+              <p id="modalShiny" class="shiny-text" style="display:none;">✨ SHINY ✨</p>
+              <p id="modalAlpha" class="alpha-text" style="display:none;">⚔️ ALPHA ⚔️</p>
+              
+              <h4>Individual Values (IVs)</h4>
+              <ul class="iv-list">
+                <li>HP: <span id="ivHp"></span></li>
+                <li>ATK: <span id="ivAtk"></span></li>
+                <li>DEF: <span id="ivDef"></span></li>
+                <li>SP.ATK: <span id="ivSpAtk"></span></li>
+                <li>SP.DEF: <span id="ivSpDef"></span></li>
+                <li>SPD: <span id="ivSpd"></span></li>
+              </ul>
+
+              <p id="modalCaptureTime" class="capture-time"></p>
+              
+              <button id="evolutionBtn" class="btn btn-primary" style="display:none; margin-top: 20px;">Evolve</button>
+              <button id="daycareBtn" class="btn btn-secondary" style="margin-top: 10px;">Put in the daycare</button>
+              <button id="releaseBtn" class="btn btn-danger" style="margin-top: 10px;">Release</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evolution Selection Modal -->
+      <div class="modal" id="evolutionModal">
+        <div class="modal-content">
+          <span class="close" onclick="document.getElementById('evolutionModal').style.display='none'">&times;</span>
+          <div class="evolution-options">
+            <!-- Evolution choices will be added here -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

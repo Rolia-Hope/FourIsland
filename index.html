@@ -5,38 +5,77 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="css/team.css" />
     <title>Four Island</title>
-    <script src="js/save.js"></script>
+    <script src="js/balance.js"></script>
+    <script src="js/daycare_balance.js"></script>
     <script src="js/pokemon_db.js"></script>
+    <script src="js/retro.js"></script>
+    <script src="js/save.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/daycare.js"></script>
+    <script src="js/incubator.js"></script>
   </head>
 
   <body>
     <header>
-      <h1>Four Island</h1>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <h1>Four Island</h1>
+        <a href="#" id="exportSaveBtn">Export</a>
+        <a href="#" id="importSaveBtn">Import</a>
+        <input type="file" id="importSaveFile" accept=".fis" style="display: none;">
+      </div>
+      <nav>
+        <a href="src/filters.html">Filters</a>
+        <a href="src/pc.html">PC</a>
+        <a href="src/store.html">Store</a>
+        <a href="src/daycare.html">Daycare</a>
+      </nav>
     </header>
     <main>
       <div class="team-container">
         <h2>Your Incubators</h2>
+        <div class="controls">
+          <button class="pause" type="button">Pause</button>
+          <div class="egg-source-selector">
+            <label for="eggSource">Egg Source:</label>
+            <select id="eggSource">
+              <option value="shelter">Shelter</option>
+              <option value="daycare">Daycare</option>
+            </select>
+          </div>
+        </div>
         <div class="incubators">
           <div class="egg-slot">
             <!-- Egg Slot 1-->
           </div>
           <div class="egg-slot">
-            <!-- Team member 2-->
+            <!-- Egg Slot 2-->
           </div>
           <div class="egg-slot">
-            <!-- Team member 3-->
+            <!-- Egg Slot 3-->
           </div>
           <div class="egg-slot">
-            <!-- Team member 4-->
+            <!-- Egg Slot 4-->
           </div>
           <div class="egg-slot">
-            <!-- Team member 5-->
+            <!-- Egg Slot 5-->
           </div>
           <div class="egg-slot">
-            <!-- Team member 6-->
+            <!-- Egg Slot 6-->
           </div>
         </div>
+
+        <div class="hatch-counters-row">
+          <div class="hatch-counters">
+            <div class="hatch-counter">
+              <div class="hatch-counter-label">Eggs Hatched</div>
+              <div class="hatch-counter-value" id="eggHatchedCount">0</div>
+            </div>
+            <div class="hatch-counter">
+              <div class="hatch-counter-label">Shinies Hatched</div>
+              <div class="hatch-counter-value" id="shinyHatchedCount">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
-
-
-</html>

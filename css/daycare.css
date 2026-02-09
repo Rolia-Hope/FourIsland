@@ -1,0 +1,545 @@
+/* Daycare Page Styling */
+
+:root {
+	--bg-dark: #2a2a2a;
+	--bg-darker: #1a1a1a;
+	--bg-card: #333333;
+	--accent-red: #ff6b6b;
+	--accent-gold: #ffd700;
+	--text-primary: #ffffff;
+	--text-secondary: #cccccc;
+	--success-green: #51cf66;
+	--error-red: #ff6b6b;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: var(--bg-dark);
+	color: var(--text-primary);
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+}
+
+header {
+	background-color: var(--bg-darker);
+	padding: 20px;
+	border-bottom: 2px solid var(--accent-red);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+header h1 {
+	font-size: 2em;
+	color: var(--accent-gold);
+}
+
+header nav {
+	display: flex;
+	gap: 20px;
+	margin-left: auto;
+}
+
+header nav a {
+	background-color: #ff6b6b;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+header nav a:hover,
+header nav a.active {
+	background-color: #ff5252;
+}
+
+main {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px 40px;
+}
+
+/* Info Section */
+.info-section {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+	margin-bottom: 30px;
+}
+
+.info-card {
+	background-color: var(--bg-card);
+	border: 2px solid var(--accent-red);
+	border-radius: 8px;
+	padding: 20px;
+	text-align: center;
+}
+
+.info-card h3 {
+	font-size: 1.1em;
+	color: var(--accent-gold);
+	margin-bottom: 10px;
+}
+
+.info-card p {
+	font-size: 1.5em;
+	color: var(--text-primary);
+}
+
+/* Selection Section */
+.selection-section {
+	background-color: var(--bg-card);
+	border: 2px solid var(--accent-red);
+	border-radius: 8px;
+	padding: 30px;
+	margin-bottom: 30px;
+}
+
+.parent-selection {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+	margin-bottom: 30px;
+}
+
+.parent-card {
+	background-color: var(--bg-darker);
+	border: 1px solid var(--text-secondary);
+	border-radius: 6px;
+	padding: 20px;
+	text-align: center;
+}
+
+.parent-card h3 {
+	font-size: 1.1em;
+	margin-bottom: 15px;
+	color: var(--accent-gold);
+}
+
+.select-btn {
+	background-color: var(--accent-red);
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+.select-btn:hover {
+	background-color: #ff5252;
+}
+
+.parent-display {
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.parent-display.hidden {
+	display: none;
+}
+
+/* Frame around the sprite (box), not around text */
+.parent-sprite-frame {
+	border: 2px solid var(--accent-red);
+	border-radius: 4px;
+	padding: 10px;
+	background-color: var(--bg-card);
+	box-sizing: content-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* The sprite itself stays transparent so alpha glow hugs pixels */
+.parent-display .parent-sprite {
+	width: 96px;
+	height: 96px;
+	image-rendering: pixelated;
+	display: block;
+	background-color: transparent;
+}
+
+/* Shiny parent - yellow background */
+.parent-display.shiny-parent .parent-sprite-frame {
+	background-color: #4a4a2a;
+	border-color: #ffff00;
+}
+
+/* Alpha parent - red aura effect around sprite only */
+.parent-display.alpha-parent .parent-sprite {
+	filter: drop-shadow(0 0 3px #ff4444) drop-shadow(0 0 6px #ff2222);
+}
+
+.parent-display p {
+	font-size: 0.9em;
+	color: var(--text-secondary);
+	min-height: 20px;
+}
+
+.clear-btn {
+	background-color: #666;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 0.85em;
+	transition: background-color 0.3s;
+}
+
+.clear-btn:hover {
+	background-color: #555;
+}
+
+.action-section {
+	text-align: center;
+	padding: 20px;
+	background-color: var(--bg-darker);
+	border-radius: 6px;
+}
+
+.action-btn {
+	background-color: var(--accent-gold);
+	color: #000;
+	border: none;
+	padding: 12px 30px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 1em;
+	transition: background-color 0.3s;
+}
+
+.action-btn:hover:not(:disabled) {
+	background-color: #ffed4e;
+}
+
+.action-btn:disabled {
+	background-color: #888;
+	color: #666;
+	cursor: not-allowed;
+}
+
+.action-btn.pause {
+	background-color: var(--error-red);
+	color: #fff;
+}
+
+.action-btn.pause:hover:not(:disabled) {
+	background-color: #ff5252;
+}
+
+.status-text {
+	margin-top: 15px;
+	padding: 10px;
+	border-radius: 4px;
+	font-size: 0.95em;
+}
+
+.status-text.success {
+	background-color: rgba(81, 207, 102, 0.2);
+	color: var(--success-green);
+	border: 1px solid var(--success-green);
+}
+
+.status-text.error {
+	background-color: rgba(255, 107, 107, 0.2);
+	color: var(--error-red);
+	border: 1px solid var(--error-red);
+}
+
+/* Breeding Info Section */
+.breeding-info-section {
+	background-color: var(--bg-card);
+	border: 2px solid var(--accent-gold);
+	border-radius: 8px;
+	padding: 30px;
+	margin-bottom: 30px;
+}
+
+.breeding-info-section.hidden {
+	display: none;
+}
+
+.breeding-info-section h2 {
+	color: var(--accent-gold);
+	margin-bottom: 20px;
+}
+
+.breeding-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 15px;
+}
+
+.breeding-grid .info-card {
+	border-color: var(--accent-gold);
+}
+
+#geneticsPreview {
+	list-style: none;
+	text-align: left;
+	padding: 10px 0;
+}
+
+#geneticsPreview li {
+	padding: 5px 0;
+	color: var(--text-secondary);
+	font-size: 0.9em;
+}
+
+/* Upgrades Section */
+.upgrades-section {
+	background-color: var(--bg-card);
+	border: 2px solid var(--accent-red);
+	border-radius: 8px;
+	padding: 30px;
+}
+
+.upgrades-section h2 {
+	color: var(--accent-gold);
+	margin-bottom: 20px;
+}
+
+.upgrades-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 20px;
+}
+
+.upgrade-card {
+	background-color: var(--bg-darker);
+	border: 2px solid var(--accent-red);
+	border-radius: 6px;
+	padding: 20px;
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.upgrade-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.upgrade-card h3 {
+	color: var(--accent-gold);
+	margin-bottom: 10px;
+	font-size: 1.1em;
+}
+
+.upgrade-description {
+	color: var(--text-secondary);
+	font-size: 0.9em;
+	margin-bottom: 15px;
+	font-style: italic;
+}
+
+.upgrade-card p {
+	margin: 8px 0;
+	color: var(--text-secondary);
+	font-size: 0.95em;
+}
+
+.upgrade-card p span {
+	color: var(--accent-gold);
+	font-weight: bold;
+}
+
+.buy-button {
+	width: 100%;
+	background-color: var(--accent-red);
+	color: white;
+	border: none;
+	padding: 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+	margin-top: 15px;
+	transition: background-color 0.3s;
+}
+
+.buy-button:hover:not(:disabled) {
+	background-color: #ff5252;
+}
+
+.buy-button:disabled {
+	background-color: #666;
+	color: #999;
+	cursor: not-allowed;
+}
+
+/* Modal */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 1000;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal:not(.hidden) {
+	display: flex;
+}
+
+.modal.hidden {
+	display: none;
+}
+
+.modal-content {
+	background-color: var(--bg-darker);
+	border: 2px solid var(--accent-red);
+	border-radius: 8px;
+	width: 90%;
+	max-width: 1000px;
+	max-height: 90vh;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-header {
+	background-color: var(--bg-card);
+	padding: 20px;
+	border-bottom: 1px solid var(--accent-red);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.modal-header h2 {
+	color: var(--accent-gold);
+	margin: 0;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	color: var(--text-primary);
+	font-size: 2em;
+	cursor: pointer;
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.3s;
+}
+
+.close-btn:hover {
+	color: var(--accent-red);
+}
+
+.modal-body {
+	padding: 20px;
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+.pc-grid-modal {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	gap: 15px;
+}
+
+.pc-slot-modal {
+	background-color: var(--bg-card);
+	border: 2px solid var(--accent-red);
+	border-radius: 6px;
+	padding: 10px;
+	text-align: center;
+	cursor: pointer;
+	transition: transform 0.2s, border-color 0.2s;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+}
+
+.pc-slot-modal:hover:not(.empty) {
+	transform: scale(1.05);
+	border-color: var(--accent-gold);
+}
+
+.pc-slot-modal.empty {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.pc-slot-modal img {
+	width: 80px;
+	height: 80px;
+	image-rendering: pixelated;
+	background-color: var(--bg-darker);
+	border: 1px solid var(--text-secondary);
+	border-radius: 4px;
+}
+
+.pc-slot-modal p {
+	font-size: 0.85em;
+	color: var(--text-secondary);
+	word-break: break-word;
+	min-height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.gender-indicator {
+	font-size: 1.2em !important;
+	margin: 0 !important;
+	min-height: auto !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	header {
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	header nav {
+		margin-left: 0;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	main {
+		padding: 0 15px 30px;
+	}
+
+	.parent-selection {
+		grid-template-columns: 1fr;
+	}
+
+	.upgrades-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.pc-grid-modal {
+		grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+	}
+
+	.modal-content {
+		width: 95%;
+		max-height: 95vh;
+	}
+}

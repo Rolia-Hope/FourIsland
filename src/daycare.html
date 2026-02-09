@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Daycare - Four Island</title>
+	<link rel="stylesheet" href="../css/daycare.css">
+</head>
+<body>
+	<header>
+		<h1>Daycare</h1>
+		<nav>
+			<a href="../index.html">Incubator</a>
+			<a href="pc.html">PC</a>
+			<a href="filters.html">Filters</a>
+			<a href="store.html">Store</a>
+			<a href="daycare.html" class="active">Daycare</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="info-section">
+			<div class="info-card">
+				<h3>Egg Capacity</h3>
+				<p><span id="currentEggs">0</span> / <span id="maxEggs">10</span></p>
+			</div>
+			<div class="info-card">
+				<h3>Breeding Status</h3>
+				<p id="breedingStatus">No active breeding</p>
+			</div>
+		</section>
+
+		<section class="selection-section">
+			<h2>Select Parents</h2>
+			<p class="instructions">Click on a Pokemon in the PC to select it as a parent</p>
+			<div class="parent-selection">
+				<div class="parent-card">
+					<h3>Parent 1</h3>
+					<div id="parent1Display" class="parent-display hidden">
+						<div class="parent-sprite-frame">
+							<img id="parent1Sprite" class="parent-sprite" src="" alt="Parent 1">
+						</div>
+						<p id="parent1Name">-</p>
+						<button id="clearParent1" class="clear-btn">Clear</button>
+					</div>
+					<div id="parent1Empty" class="parent-empty">
+						<p>Not selected</p>
+					</div>
+				</div>
+
+				<div class="parent-card">
+					<h3>Parent 2</h3>
+					<div id="parent2Display" class="parent-display hidden">
+						<div class="parent-sprite-frame">
+							<img id="parent2Sprite" class="parent-sprite" src="" alt="Parent 2">
+						</div>
+						<p id="parent2Name">-</p>
+						<button id="clearParent2" class="clear-btn">Clear</button>
+					</div>
+					<div id="parent2Empty" class="parent-empty">
+						<p>Not selected</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="action-section">
+				<button id="startBreedingBtn" class="action-btn" disabled>Start Breeding</button>
+				<p id="compatibilityStatus" class="status-text"></p>
+			</div>
+		</section>
+
+		<section class="breeding-info-section hidden" id="breedingInfo">
+			<h2>Breeding Details</h2>
+			<div class="breeding-grid">
+				<div class="info-card">
+					<h3>Timer Duration</h3>
+					<p id="timerDuration">-</p>
+				</div>
+				<div class="info-card">
+					<h3>Time Remaining</h3>
+					<p id="timeRemaining">-</p>
+				</div>
+				<div class="info-card">
+					<h3>Egg Species</h3>
+					<p id="eggSpecies">-</p>
+				</div>
+				<div class="info-card">
+					<h3>Genetics Preview</h3>
+					<ul id="geneticsPreview"></ul>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script src="../js/balance.js"></script>
+	<script src="../js/daycare_balance.js"></script>
+	<script src="../js/pokemon_db.js"></script>
+	<script src="../js/save.js"></script>
+	<script src="../js/retro.js"></script>
+	<script src="../js/daycare.js"></script>
+	<script src="../js/daycare_ui.js"></script>
+</body>
+</html>

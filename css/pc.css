@@ -1,0 +1,490 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #2a2a2a;
+	color: #fff;
+	font-family: Arial, sans-serif;
+}
+
+header {
+	background-color: #1a1a1a;
+	padding: 20px;
+	border-bottom: 3px solid #ff6b6b;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header h1 {
+	background-color: transparent;
+	font-size: 2.5em;
+}
+
+header nav {
+	display: flex;
+	gap: 15px;
+	background-color: transparent;
+}
+
+header nav a {
+	background-color: #ff6b6b;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+header nav a:hover {
+	background-color: #ff5252;
+}
+
+header a {
+	background-color: #ff6b6b;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+header a:hover {
+	background-color: #ff5252;
+}
+
+main {
+	padding: 40px 20px;
+}
+
+.pc-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.pc-container h2 {
+	background-color: transparent;
+	margin-bottom: 30px;
+	font-size: 2em;
+	text-align: center;
+	color: #ff6b6b;
+}
+
+/* PC Boxes Container */
+.pc-boxes-container {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+/* Individual PC Box */
+.pc-box {
+	background-color: #1a1a1a;
+	border: 2px solid #555;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.box-title {
+	background-color: transparent;
+	color: #ff6b6b;
+	font-size: 1.5em;
+	margin-bottom: 15px;
+	text-align: center;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #ff6b6b;
+}
+
+/* PC Grid Layout - 6 columns (30 boxes = 6 columns x 5 rows per box) */
+.pc-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 15px;
+}
+
+/* PC Slot Styling */
+.pc-slot {
+	background-color: #3a3a3a;
+	border: 2px solid #555;
+	border-radius: 8px;
+	padding: 10px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	min-height: 120px;
+}
+
+.pc-slot:hover {
+	background-color: #4a4a4a;
+	border-color: #ff6b6b;
+	transform: scale(1.05);
+	box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+/* Selected slot for swapping */
+.pc-slot.selected {
+	border-color: #00ff00;
+	border-width: 3px;
+	box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+/* Daycare parent pokemon - Blue border */
+.pc-slot.daycare-pokemon {
+	border-color: #00a8ff;
+	border-width: 3px;
+	box-shadow: 0 0 12px rgba(0, 168, 255, 0.5);
+}
+
+.pc-slot.daycare-pokemon:hover {
+	border-color: #00d4ff;
+	box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+}
+
+/* Shiny Pokemon - Yellowish background */
+.pc-slot.shiny-pokemon {
+	background-color: #4a4a2a;
+}
+
+.pc-slot.shiny-pokemon:hover {
+	background-color: #5a5a3a;
+	border-color: #ffff00;
+}
+
+/* Alpha Pokemon - Red sprite effect */
+.pc-slot.alpha-pokemon .pc-pokemon-sprite {
+	filter: drop-shadow(0 0 3px #ff4444) drop-shadow(0 0 6px #ff2222);
+	outline-offset: 2px;
+}
+
+/* Empty Slot */
+.empty-pokemon-slot {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2em;
+	color: #666;
+	background-color: transparent;
+}
+
+/* Shiny/Alpha Indicators */
+.indicators {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: flex;
+	gap: 3px;
+	background-color: transparent;
+}
+
+.shiny-badge,
+.alpha-badge {
+	font-size: 1.2em;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 2px 6px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Modal Styling */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.modal-content {
+	background-color: #2a2a2a;
+	margin: 5% auto;
+	padding: 30px;
+	border: 3px solid #ff6b6b;
+	border-radius: 10px;
+	width: 90%;
+	max-width: 600px;
+	max-height: 80vh;
+	overflow-y: auto;
+	position: relative;
+}
+
+.close {
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	font-size: 2em;
+	font-weight: bold;
+	color: #ff6b6b;
+	cursor: pointer;
+	background-color: transparent;
+	transition: color 0.3s;
+}
+
+.close:hover {
+	color: #ff5252;
+}
+
+/* Pokemon Details */
+.pokemon-details {
+	display: flex;
+	gap: 30px;
+	background-color: transparent;
+}
+
+.pokemon-sprite-frame {
+	width: 150px;
+	height: 150px;
+	border: 2px solid #ff6b6b;
+	border-radius: 8px;
+	padding: 10px;
+	background-color: #3a3a3a;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.pokemon-sprite {
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+.pokemon-info {
+	flex: 1;
+	background-color: transparent;
+}
+
+.pokemon-info h3 {
+	background-color: transparent;
+	color: #ff6b6b;
+	font-size: 1.8em;
+	margin-bottom: 10px;
+}
+
+.pokemon-info p {
+	background-color: transparent;
+	margin-bottom: 8px;
+	font-size: 1.1em;
+	line-height: 1.6;
+}
+
+.shiny-text {
+	color: #ffd700 !important;
+	font-weight: bold;
+	text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.alpha-text {
+	color: #ff6b6b !important;
+	font-weight: bold;
+	text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+/* IVs List */
+.pokemon-info h4 {
+	background-color: transparent;
+	color: #ff6b6b;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 1.1em;
+}
+
+.iv-list {
+	background-color: transparent;
+	list-style: none;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.iv-list li {
+	background-color: #3a3a3a;
+	padding: 8px 12px;
+	border-radius: 5px;
+	border-left: 3px solid #ff6b6b;
+}
+
+.capture-time {
+	background-color: transparent;
+	color: #999;
+	font-size: 0.9em;
+	margin-top: 20px;
+	font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+	.pc-grid {
+		grid-template-columns: repeat(5, 1fr);
+		gap: 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	.pc-grid {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 10px;
+	}
+
+	.pokemon-details {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.pokemon-sprite-frame {
+		width: 120px;
+		height: 120px;
+		margin: 0 auto;
+	}
+
+	.modal-content {
+		width: 95%;
+		margin: 10% auto;
+		padding: 20px;
+	}
+}
+
+@media (max-width: 480px) {
+	.pc-grid {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 8px;
+	}
+
+	header {
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	header h1 {
+		font-size: 1.8em;
+	}
+}
+
+/* Evolution Styles */
+#evolutionBtn {
+	background-color: #ff6b6b;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 5px;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+#evolutionBtn:hover:not(:disabled) {
+	background-color: #ff5252;
+}
+
+#evolutionBtn:disabled {
+	background-color: #999;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+#daycareBtn {
+	background-color: #ff6b6b;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 5px;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+#daycareBtn:hover {
+	background-color: #ff5252;
+}
+
+#daycareBtn:disabled {
+	background-color: #999;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+#releaseBtn {
+	background-color: #e74c3c;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 5px;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+#releaseBtn:hover {
+	background-color: #d43c2d;
+}
+
+.evolution-options {
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.evolution-choice-btn {
+	background-color: #ff6b6b;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 5px;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.evolution-choice-btn:hover {
+	background-color: #ff5252;
+}
+
+.evolution-cancel-btn {
+	background-color: #555;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 5px;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.evolution-cancel-btn:hover {
+	background-color: #666;
+}

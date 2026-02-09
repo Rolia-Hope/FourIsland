@@ -1,22 +1,253 @@
 * {
-    background-color: grey;
- }
-
-.incubators {
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-    border: 2px solid black; 
-    border-radius: 15px;    
-    padding: 110px;
-    margin-left: 150px;
-    margin-right: 150px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
+body {
+	background-color: #2a2a2a;
+	color: #fff;
+	font-family: Arial, sans-serif;
+}
+
+header {
+	background-color: #1a1a1a;
+	padding: 20px;
+	border-bottom: 3px solid #ff6b6b;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header h1 {
+	background-color: transparent;
+	font-size: 2.5em;
+}
+
+header a {
+	background-color: #ff6b6b;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+header a:hover {
+	background-color: #ff5252;
+}
+
+main {
+	padding: 40px 20px;
+}
+
+.team-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.team-container h2 {
+	background-color: transparent;
+	margin-bottom: 30px;
+	font-size: 2em;
+	text-align: center;
+	color: #ff6b6b;
+}
+
+.pause {
+	display: block;
+	margin: 0 auto 30px;
+	background-color: #ff6b6b;
+	color: #fff;
+	padding: 12px 30px;
+	border: none;
+	border-radius: 5px;
+	font-size: 1.1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.pause:hover {
+	background-color: #ff5252;
+}
+
+.pause.paused {
+	background-color: #4CAF50;
+}
+
+.pause.paused:hover {
+	background-color: #45a049;
+}
+
+.controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	margin-bottom: 30px;
+	flex-wrap: wrap;
+}
+
+.egg-source-selector {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background-color: #333;
+	padding: 12px 20px;
+	border-radius: 5px;
+	border: 2px solid #555;
+}
+
+.egg-source-selector label {
+	font-weight: bold;
+	color: #ff6b6b;
+}
+
+.egg-source-selector select {
+	background-color: #444;
+	color: #fff;
+	border: 1px solid #666;
+	padding: 8px 12px;
+	border-radius: 4px;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.egg-source-selector select:hover {
+	background-color: #555;
+}
+
+.egg-source-selector select:focus {
+	outline: none;
+	border-color: #ff6b6b;
+	background-color: #555;
+}
+
+/* Incubators Container */
+.incubators {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	justify-items: center;
+	align-items: start;
+	gap: 15px;
+	padding: 30px;
+	background-color: #1a1a1a;
+	border: 2px solid #555;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+/* Egg Slot Styling */
 .egg-slot {
-    width: 200px;
-    height: 250px;
-    border: 2px solid black;
-    gap: 10px; 
-    margin: 0 5px;
+	width: 140px;
+	height: 140px;
+	background-color: #3a3a3a;
+	border: 2px solid #555;
+	border-radius: 8px;
+	padding: 10px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	position: relative;
+}
+
+.egg-slot:hover {
+	background-color: #4a4a4a;
+	border-color: #ff6b6b;
+	transform: scale(1.05);
+	box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+.egg-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	background-color: transparent;
+}
+
+.egg-sprite {
+	width: 150px;
+	height: 150px;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+	border: 2px solid #ff6b6b;
+	border-radius: 8px;
+	background-color: #2a2a2a;
+}
+
+.egg-info {
+	background-color: transparent;
+	font-size: 0.85em;
+	color: #ccc;
+	text-align: center;
+	width: 100%;
+}
+
+.pokemon-name {
+	display: none;
+}
+
+.egg-progress {
+	background-color: transparent;
+	margin: 3px 0 0 0;
+	font-size: 0.8em;
+	color: #999;
+}
+
+.progress-bar {
+	background-color: #2a2a2a;
+	border: 1px solid #555;
+	border-radius: 3px;
+	height: 6px;
+	width: 100%;
+	overflow: hidden;
+	margin-top: 4px;
+}
+
+.progress-fill {
+	background-color: #ff6b6b;
+	height: 100%;
+	transition: width 0.3s;
+}
+
+/* Hatch counters (bottom-right under incubators) */
+.hatch-counters-row {
+	max-width: 1000px;
+	margin: 15px auto 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.hatch-counters {
+	display: flex;
+	gap: 12px;
+}
+
+.hatch-counter {
+	background-color: #1a1a1a;
+	border: 2px solid #555;
+	border-radius: 10px;
+	padding: 12px 16px;
+	min-width: 170px;
+	text-align: right;
+}
+
+.hatch-counter-label {
+	font-size: 0.85em;
+	color: #ccc;
+}
+
+.hatch-counter-value {
+	font-size: 1.4em;
+	font-weight: bold;
+	color: #ff6b6b;
 }
