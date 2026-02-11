@@ -21,29 +21,20 @@
   --text-muted: #B8C1D1;
   --text-brown: #6B3F1D;
   --text-hover: #9A4A23;
+  --text-light: #ffffff;
 
   /* Accents */
   --accent-red: #E65A5A;
   --accent-red-hover: #C58080;
-  --accent-gold: #E3B15A;
   --accent-green: #45a049;
   --accent-green-hover: #51CF66;
-  --accent-blue: #4A90E2;
-  --accent-blue-hover: #6BA0E8;
-  --accent-blue-dark: #2A3E5F;
 
   /* Four Island House Colors */
   --door-blue: #60A0D8;
   --door-outline-blue: #3060A0;
-  --door-trim-beige: #C8B068;
   --house-wall-grey: #C0D0E0;
   --house-wall-purple: #9898D8;
   --house-outline-grey: #404868;
-
-  --text-main: #243447;        /* primary readable text */
-  --text-soft: #4a5d73;        /* secondary labels */
-  --text-light: #ffffff;       /* text on dark surfaces */
-  --text-accent: #ffe6a7;      /* headings */
 }
 
 * {
