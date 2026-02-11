@@ -31,6 +31,19 @@
   --accent-blue: #4A90E2;
   --accent-blue-hover: #6BA0E8;
   --accent-blue-dark: #2A3E5F;
+
+  /* Four Island House Colors */
+  --door-blue: #60A0D8;
+  --door-outline-blue: #3060A0;
+  --door-trim-beige: #C8B068;
+  --house-wall-grey: #C0D0E0;
+  --house-wall-purple: #9898D8;
+  --house-outline-grey: #404868;
+
+  --text-main: #243447;        /* primary readable text */
+  --text-soft: #4a5d73;        /* secondary labels */
+  --text-light: #ffffff;       /* text on dark surfaces */
+  --text-accent: #ffe6a7;      /* headings */
 }
 
 * {
@@ -39,12 +52,41 @@
 	box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-	background-color: var(--bg-main);
-	color: var(--text-primary);
-	font-family: 'VT323', monospace;
-	text-rendering: pixelated;
-	line-height: 1.6;
+  background: linear-gradient(
+    to bottom,
+    var(--house-wall-grey) 0%,
+    var(--house-wall-grey) 75%,
+    var(--house-wall-purple) 75%,
+    var(--house-wall-purple) 100%
+  );
+  box-shadow:
+    inset 0 20px 0 rgba(255,255,255,0.15),
+    inset 0 -20px 0 rgba(0,0,0,0.15);
+  color: var(--text-primary);
+  font-family: 'VT323', monospace;
+  text-rendering: pixelated;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+button,
+select,
+option,
+label {
+  font-family: 'VT323', monospace;
+  text-rendering: pixelated;
+  font-size: 1.3em;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 header {
@@ -67,7 +109,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 
 header h1 {
@@ -97,7 +139,15 @@ header a:hover {
 }
 
 main {
-	padding: 40px 20px;
+	padding: 10px 20px 30px;
+}
+
+.house-title {
+  color: var(--house-outline-grey);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.25);
 }
 
 .team-container {
@@ -115,16 +165,17 @@ main {
 
 .pause {
 	display: block;
-	margin: 0 auto 30px;
+	margin: 0;
 	background-color: var(--accent-red);
 	color: var(--text-primary);
-	padding: 12px 30px;
-	border: none;
-	border-radius: 5px;
-	font-size: 1.1em;
+	padding: 16px 42px;
+	border: 3px solid #7a1f1f;
+	border-radius: 6px;
+	font-size: 1.5em; 
 	font-weight: bold;
+	font-family: 'VT323', monospace;
 	cursor: pointer;
-	transition: background-color 0.3s;
+	transition: background-color 0.2s, transform 0.05s;
 }
 
 .pause:hover {
@@ -139,23 +190,22 @@ main {
 	background-color: var(--accent-green-hover);
 }
 
-.controls {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 30px;
-	margin-bottom: 30px;
-	flex-wrap: wrap;
+.pause:active {
+  transform: translateY(2px);
 }
 
 .egg-source-selector {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	background-color: var(--bg-panel);
-	padding: 12px 20px;
-	border-radius: 5px;
-	border: 2px solid var(--bg-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background-color: var(--bg-main);
+  border: 6px solid var(--text-brown);
+  padding: 12px 18px;
+
+  box-shadow:
+    inset 0 6px 0 rgba(0,0,0,0.3),
+    0 4px 0 rgba(0,0,0,0.3);
 }
 
 .egg-source-selector label {
@@ -164,9 +214,9 @@ main {
 }
 
 .egg-source-selector select {
-	background-color: var(--bg-card);
+	background-color: #223a5e;
 	color: var(--text-primary);
-	border: 1px solid var(--bg-border);
+	border: 2px solid var(--bg-border);
 	padding: 8px 12px;
 	border-radius: 4px;
 	font-size: 1em;
@@ -184,62 +234,12 @@ main {
 	background-color: var(--bg-card);
 }
 
-/* Incubators Container */
-.incubators {
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	justify-items: center;
-	align-items: start;
-	gap: 15px;
-	padding: 30px;
-	background-color: var(--bg-panel);
-	border: 2px solid var(--bg-border);
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-	max-width: 1000px;
-	margin: 0 auto;
-}
-
-/* Egg Slot Styling */
-.egg-slot {
-	width: 140px;
-	height: 140px;
-	background-color: var(--bg-card);
-	border: 2px solid var(--bg-border);
-	border-radius: 8px;
-	padding: 10px;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	position: relative;
-}
-
-.egg-slot:hover {
-	background-color: var(--bg-card-highlight);
-	border-color: var(--accent-blue-hover);
-	box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
-	transform: scale(1.05);
-}
-
-.egg-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 8px;
-	width: 100%;
-	background-color: transparent;
-}
-
 .egg-sprite {
-	width: 150px;
-	height: 150px;
+	width: 70%;
+	height: auto;
+	max-width: 120px;
 	image-rendering: pixelated;
 	image-rendering: crisp-edges;
-	border: 2px solid var(--bg-border);
-	border-radius: 8px;
-	background-color: var(--bg-card);
 }
 
 .egg-info {
@@ -256,56 +256,211 @@ main {
 
 .egg-progress {
 	background-color: transparent;
-	margin: 3px 0 0 0;
-	font-size: 0.8em;
-	color: var(--text-muted);
+	margin-top: 6px;
+	font-size: 0.75em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #dce9ff;
+	font-weight: 500;
 }
 
 .progress-bar {
 	background-color: var(--bg-panel);
 	border: 1px solid var(--bg-border);
 	border-radius: 3px;
-	height: 6px;
+	height: 5px;
 	width: 100%;
 	overflow: hidden;
 	margin-top: 4px;
 }
 
-.progress-fill {
-	background-color: var(--accent-blue);
-	height: 100%;
-	transition: width 0.3s;
+.house-layout {
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px 40px;
 }
 
-/* Hatch counters (bottom-right under incubators) */
-.hatch-counters-row {
-	max-width: 1000px;
-	margin: 15px auto 0;
-	display: flex;
-	justify-content: flex-end;
+.house-body {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* important */
+  gap: 18px;
 }
 
-.hatch-counters {
-	display: flex;
-	gap: 12px;
+/* Title */
+.house-title {
+  text-align: center;
+}
+
+/* Controls centered properly */
+.house-controls {
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-row {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto 10px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 40px;
+  padding: 60px 40px;
+  background-color: var(--bg-card);
+  border: 10px solid var(--roof-outline);
+  box-shadow:
+    inset 0 10px 0 rgba(255,255,255,0.12),
+    inset 0 -10px 0 rgba(0,0,0,0.35),
+    0 8px 0 rgba(0,0,0,0.4);
+}
+
+/* Override old egg-slot behavior */
+.window-row .egg-slot {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px 10px;
+  box-sizing: border-box;
+
+  /* WINDOW FRAME */
+  background-color: var(--bg-main);
+  color: var(--text-light);
+  border: 6px solid var(--text-brown);
+  box-shadow:
+    inset 0 6px 0 rgba(0,0,0,0.3),
+    0 4px 0 rgba(0,0,0,0.3);
+}
+
+/* Door Panel */
+.door-panel {
+  width: 40%;
+  max-width: 1000px; /* same as window-row */
+  margin: 10px auto 0;
+  display: flex;
+  justify-content: center;
+  filter: drop-shadow(0 12px 0 rgba(0,0,0,0.35));
+  color: #eaf6ff;
+}
+
+.door-panel::after {
+  content:"";
+  position:absolute;
+  bottom:-8px;
+  left:0;
+  right:0;
+  height:8px;
+  background:rgba(0,0,0,0.35);
+}
+
+/* The actual door */
+.door-inner {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  background-color: var(--door-blue);
+  border: 8px solid var(--door-outline-blue);
+  box-shadow:
+    inset 0 8px 0 rgba(255,255,255,0.25),
+    inset 0 -8px 0 rgba(0,0,0,0.25);
+}
+
+.door-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 8px;
+  transform: translateX(-50%);
+  background-color: var(--door-outline-blue);
+  z-index: 0;
+}
+
+.window-row::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: var(--text-brown);
+}
+
+.window-row::after {
+  content: "";
+  position: absolute;
+  top: -36px;
+  left: -10px;
+  right: -10px;
+  height: 16px;
+  background-color: var(--roof-dark);
+  border-left: 10px solid var(--roof-outline);
+  border-right: 10px solid var(--roof-outline);
 }
 
 .hatch-counter {
-	background-color: #1a1a1a;
-	border: 2px solid #555;
-	border-radius: 10px;
-	padding: 12px 16px;
-	min-width: 170px;
-	text-align: right;
+  width: 50%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  background-color: rgba(255,255,255,0.1);
+  padding: 20px 0;
+  border-radius: 4px;
 }
 
-.hatch-counter-label {
-	font-size: 0.85em;
-	color: #ccc;
+.hatch-counters-row {
+  margin-top: 40px;
+  padding: 30px 40px;
+  background-color: var(--bg-card);
+  border: 6px solid var(--text-brown);
+  width: 400px;
+  text-align: center;
 }
 
 .hatch-counter-value {
-	font-size: 1.4em;
-	font-weight: bold;
-	color: var(--accent-gold);
+  color: var(--house-outline-grey);
+  font-weight: 700;
+  font-size: 2.2em;
+  text-shadow:
+    0 0 4px rgba(255,255,255,0.6),
+    0 2px 0 rgba(0,0,0,0.35);
+}
+
+.hatch-counter-label {
+  white-space: nowrap;
+  margin-bottom: 6px;
+  opacity: 0.8;
+  color: var(--house-outline-grey);
+  font-weight: 700;
+  font-size: 1.5em;
+  text-shadow:
+    0 0 4px rgba(255,255,255,0.6),
+    0 2px 0 rgba(0,0,0,0.35);
+}
+
+.hatch-counter:first-child {
+  left: 0;
+}
+
+.hatch-counter:last-child {
+  right: 0;
 }
