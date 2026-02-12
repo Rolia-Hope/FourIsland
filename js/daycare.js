@@ -210,17 +210,19 @@ function inheritIVs(parent1, parent2) {
 }
 
 // Generate shiny inheritance
+// - Base odds are always 1 in BALANCE.SHINY_ODDS.
+// - If DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny.enabled === true,
+//   parent shinies apply the one/two multipliers on top of base odds.
+// - If enabled === false, we still use the base odds but ignore parents.
 function inheritShiny(parent1, parent2) {
-	if (!DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny.enabled) {
-		return false;
-	}
-
-	// Base odds are defined as 1 in BALANCE.SHINY_ODDS
 	let multiplier = 1;
-	if (parent1.isShiny && parent2.isShiny) {
-		multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny.two;
-	} else if (parent1.isShiny || parent2.isShiny) {
-		multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny.one;
+
+	if (DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny.enabled) {
+		if (parent1.isShiny && parent2.isShiny) {
+			multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny.two;
+		} else if (parent1.isShiny || parent2.isShiny) {
+			multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny.one;
+		}
 	}
 
 	const shinyChance = Math.min(1, (1 / BALANCE.SHINY_ODDS) * multiplier);
@@ -228,17 +230,19 @@ function inheritShiny(parent1, parent2) {
 }
 
 // Generate alpha inheritance
+// - Base odds are always 1 in BALANCE.ALPHA_ODDS.
+// - If DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha.enabled === true,
+//   parent alphas apply the one/two multipliers.
+// - If enabled === false, we use base odds only (no parent influence).
 function inheritAlpha(parent1, parent2) {
-	if (!DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha.enabled) {
-		return false;
-	}
-
-	// Base odds are defined as 1 in BALANCE.ALPHA_ODDS
 	let multiplier = 1;
-	if (parent1.isAlpha && parent2.isAlpha) {
-		multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha.two;
-	} else if (parent1.isAlpha || parent2.isAlpha) {
-		multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha.one;
+
+	if (DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha.enabled) {
+		if (parent1.isAlpha && parent2.isAlpha) {
+			multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha.two;
+		} else if (parent1.isAlpha || parent2.isAlpha) {
+			multiplier = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha.one;
+		}
 	}
 
 	const alphaChance = Math.min(1, (1 / BALANCE.ALPHA_ODDS) * multiplier);
@@ -246,22 +250,21 @@ function inheritAlpha(parent1, parent2) {
 }
 
 // Generate nature inheritance
+// - "Base" behaviour: random nature from BALANCE.NATURES.
+// - If DAYCARE_BALANCE.GENETICS_MULTIPLIERS.nature.enabled === true
+//   and both parents share the same nature, we apply matchChance% to
+//   inherit that nature; otherwise we fall back to base behaviour.
 function inheritNature(parent1, parent2) {
-	if (!DAYCARE_BALANCE.GENETICS_MULTIPLIERS.nature.enabled) {
-		// Random nature if disabled
-		const natures = BALANCE.NATURES;
-		return natures[Math.floor(Math.random() * natures.length)];
-	}
-	
-	// If both parents have same nature, chance to inherit it (percentage)
-	if (parent1.nature === parent2.nature) {
+	// If genetics multiplier is enabled and parents share the same nature,
+	// roll the inheritance chance.
+	if (DAYCARE_BALANCE.GENETICS_MULTIPLIERS.nature.enabled && parent1.nature === parent2.nature) {
 		const inheritChance = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.nature.matchChance / 100;
 		if (Math.random() < inheritChance) {
 			return parent1.nature;
 		}
 	}
 
-	// Random nature
+	// Base behaviour: random nature
 	const natures = BALANCE.NATURES;
 	return natures[Math.floor(Math.random() * natures.length)];
 }
@@ -283,14 +286,21 @@ function inheritGender(eggSpecies) {
 }
 
 // Generate retro sprite inheritance with genetics multipliers
+// - Base behaviour: use retro.js roll logic with pure 1-in-X RETRO_SPRITES
+//   odds (no parent influence).
+// - If DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.enabled === true,
+//   parents' retro values are passed to rollRetroSprite so that the
+//   one/two multipliers can apply.
 function inheritRetroSprite(parent1, parent2, eggSpeciesGen) {
-	if (!DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.enabled) {
-		return 'base';
-	}
-
-	// Use the shared retro roll logic from retro.js
 	const parent1Retro = parent1.retro || 'base';
 	const parent2Retro = parent2.retro || 'base';
+
+	// If retro genetics are disabled, roll with no parent influence
+	if (!DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.enabled) {
+		return rollRetroSprite(eggSpeciesGen, null, null);
+	}
+
+	// Use the shared retro roll logic from retro.js with parents
 	return rollRetroSprite(eggSpeciesGen, parent1Retro, parent2Retro);
 }
 
