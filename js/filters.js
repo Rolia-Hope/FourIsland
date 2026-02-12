@@ -26,40 +26,41 @@ let currentFilterBeingEdited = null;
 
 document.addEventListener('DOMContentLoaded', () => {
 	const addFilterBtn = document.getElementById('addFilterBtn');
-	const filterModal = document.getElementById('filterModal');
-	const closeBtn = document.querySelector('.close');
 	const cancelBtn = document.getElementById('cancelFilterBtn');
 	const saveCriteriaBtn = document.getElementById('saveCriteriaBtn');
 	const addCriteriaBtn = document.getElementById('addCriteriaBtn');
+	const inlineBuilder = document.getElementById('inlineBuilder');
+	const emptyMsg = document.getElementById("emptyMessage");
 
 	addFilterBtn.addEventListener('click', () => {
 		currentFilterBeingEdited = { criteria: [] };
 		document.getElementById('criteriaList').innerHTML = '';
-		filterModal.style.display = 'block';
-	});
-
-	closeBtn.addEventListener('click', () => {
-		filterModal.style.display = 'none';
-		currentFilterBeingEdited = null;
+		inlineBuilder.classList.remove('hidden');
+		updateEmptyMessage();
 	});
 
 	cancelBtn.addEventListener('click', () => {
-		filterModal.style.display = 'none';
+		inlineBuilder.classList.add('hidden');
 		currentFilterBeingEdited = null;
-	});
-
-	window.addEventListener('click', (e) => {
-		if (e.target === filterModal) {
-			filterModal.style.display = 'none';
-			currentFilterBeingEdited = null;
-		}
+		updateEmptyMessage();
 	});
 
 	addCriteriaBtn.addEventListener('click', addCriteriaInput);
 	saveCriteriaBtn.addEventListener('click', saveFilter);
 
 	renderFilters();
+	updateEmptyMessage();
 });
+
+function updateEmptyMessage() {
+	const empty = document.getElementById("emptyMessage");
+	if (!empty) return;
+
+	const hasFilters = getFilters().length > 0;
+	const builderOpen = !document.getElementById("inlineBuilder").classList.contains("hidden");
+
+	empty.style.display = (!hasFilters && !builderOpen) ? "block" : "none";
+}
 
 function addCriteriaInput() {
 	const criteriaList = document.getElementById('criteriaList');
@@ -91,8 +92,10 @@ function addCriteriaInput() {
 
 		<div class="criteria-retro-options" style="display: none;"></div>
 
-		<input type="number" class="criteria-min-iv" min="0" max="31" placeholder="Min IV" style="display: none;" />
-		<input type="number" class="criteria-max-iv" min="0" max="31" placeholder="Max IV" style="display: none;" />
+		<div class="iv-range">
+  			<input type="number" class="criteria-min-iv" min="0" max="31" placeholder="Min IV" style="display:none;" />
+  			<input type="number" class="criteria-max-iv" min="0" max="31" placeholder="Max IV" style="display:none;" />
+		</div>
 		<input type="number" class="criteria-numeric" min="0" max="6" placeholder="Number of perfect IVs" style="display: none;" />
 
 		<button class="btn btn-danger remove-criteria" onclick="removeCriteria(${criteriaIndex})">Remove</button>
@@ -115,6 +118,7 @@ function updateCriteriaOptions(index) {
 
 	// Hide all inputs by default
 	valueSelect.style.display = 'block';
+	minIvInput.parentElement.style.display = 'none';
 	minIvInput.style.display = 'none';
 	maxIvInput.style.display = 'none';
 	numericInput.style.display = 'none';
@@ -130,8 +134,9 @@ function updateCriteriaOptions(index) {
 
 	if (selectedType === CRITERIA_TYPES.IV_STAT) {
 		// For IV stats, show min/max inputs and stat dropdown
+		minIvInput.parentElement.style.display = 'flex';
 		minIvInput.style.display = 'block';
-		maxIvInput.style.display = 'block';
+    	maxIvInput.style.display = 'block';
 		valueSelect.innerHTML = '<option value="">Select stat...</option>';
 		CRITERIA_OPTIONS[selectedType].values.forEach(value => {
 			const option = document.createElement('option');
@@ -205,7 +210,10 @@ function saveFilter() {
 
 	const criteria = [];
 
+	let invalid = false;
+
 	criteriaGroups.forEach((group) => {
+		if (invalid) return;
 		const typeSelect = group.querySelector('.criteria-type');
 		const valueSelect = group.querySelector('.criteria-value');
 		const minIvInput = group.querySelector('.criteria-min-iv');
@@ -218,6 +226,7 @@ function saveFilter() {
 
 		if (!type) {
 			alert('Please select a type for all criteria');
+			invalid = true;
 			return;
 		}
 
@@ -261,6 +270,8 @@ function saveFilter() {
 		criteria.push(criteriaObj);
 	});
 
+	if (invalid) return;
+
 	if (criteria.length === 0) {
 		alert('Add at least one criteria');
 		return;
@@ -287,18 +298,21 @@ function saveFilter() {
 
 	saveGameData();
 
-	// Close modal and refresh
-	document.getElementById('filterModal').style.display = 'none';
+	// Close builder and refresh
+	closeBuilder()
 	currentFilterBeingEdited = null;
 	renderFilters();
+	updateEmptyMessage();
 }
 
 function renderFilters() {
 	const filtersList = document.getElementById('filtersList');
 	const filters = getFilters();
 
+	filtersList.innerHTML = '';
+
 	if (filters.length === 0) {
-		filtersList.innerHTML = '<div class="empty-message">No filters created yet. Click "Add Filter" to create one.</div>';
+		updateEmptyMessage();
 		return;
 	}
 
@@ -306,7 +320,7 @@ function renderFilters() {
 
 	filters.forEach((filter, index) => {
 		const filterCard = document.createElement('div');
-		filterCard.className = 'filter-card';
+		filterCard.className = `filter-card ${filter.active ? 'active' : ''}`;
 
 		const filterHeader = document.createElement('div');
 		filterHeader.className = 'filter-header';
@@ -380,6 +394,7 @@ function toggleFilter(index) {
 	getFilters()[index].active = !getFilters()[index].active;
 	saveGameData();
 	renderFilters();
+	updateEmptyMessage();
 }
 
 // Edit an existing filter
@@ -438,7 +453,8 @@ function editFilter(index) {
 		}, 0);
 	});
 
-	document.getElementById('filterModal').style.display = 'block';
+	openBuilder()
+	updateEmptyMessage();
 }
 
 // Delete a filter
@@ -447,7 +463,18 @@ function deleteFilter(index) {
 		getFilters().splice(index, 1);
 		saveGameData();
 		renderFilters();
+		updateEmptyMessage();
 	}
+}
+
+function openBuilder() {
+	document.getElementById('inlineBuilder').classList.remove('hidden');
+	updateEmptyMessage();
+}
+
+function closeBuilder() {
+	document.getElementById('inlineBuilder').classList.add('hidden');
+	updateEmptyMessage();
 }
 
 // Check if a Pokemon matches any active filter

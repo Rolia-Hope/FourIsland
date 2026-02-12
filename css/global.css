@@ -1,0 +1,34 @@
+:root {
+  /* Roof */
+  --roof-main: #C07A2B;
+  --roof-light: #E3B15A;
+  --roof-dark: #9A5A1E;
+  --roof-outline: #6F3F14;
+
+  /* Backgrounds */
+  --bg-main: #1F2F4A;
+  --bg-panel: #2A3E5F;
+  --bg-card: #3A3F44;
+  --bg-card-highlight: #464747;
+  --bg-border: #141C2F;
+
+  /* Text */
+  --text-primary: #F2F0E6;
+  --text-muted: #B8C1D1;
+  --text-brown: #6B3F1D;
+  --text-hover: #9A4A23;
+  --text-light: #ffffff;
+
+  /* Accents */
+  --accent-red: #E65A5A;
+  --accent-red-hover: #C58080;
+  --accent-green: #45a049;
+  --accent-green-hover: #51CF66;
+
+  /* Four Island House Colors */
+  --door-blue: #60A0D8;
+  --door-outline-blue: #3060A0;
+  --house-wall-grey: #C0D0E0;
+  --house-wall-purple: #9898D8;
+  --house-outline-grey: #404868;
+}

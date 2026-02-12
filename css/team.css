@@ -1,41 +1,7 @@
 /* Team Page Styling */
 
+@import "global.css";
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen&family=Nunito&display=swap');
-
-:root {
-  /* Roof */
-  --roof-main: #C07A2B;
-  --roof-light: #E3B15A;
-  --roof-dark: #9A5A1E;
-  --roof-outline: #6F3F14;
-
-  /* Backgrounds */
-  --bg-main: #1F2F4A;
-  --bg-panel: #2A3E5F;
-  --bg-card: #3A3F44;
-  --bg-card-highlight: #464747;
-  --bg-border: #141C2F;
-
-  /* Text */
-  --text-primary: #F2F0E6;
-  --text-muted: #B8C1D1;
-  --text-brown: #6B3F1D;
-  --text-hover: #9A4A23;
-  --text-light: #ffffff;
-
-  /* Accents */
-  --accent-red: #E65A5A;
-  --accent-red-hover: #C58080;
-  --accent-green: #45a049;
-  --accent-green-hover: #51CF66;
-
-  /* Four Island House Colors */
-  --door-blue: #60A0D8;
-  --door-outline-blue: #3060A0;
-  --house-wall-grey: #C0D0E0;
-  --house-wall-purple: #9898D8;
-  --house-outline-grey: #404868;
-}
 
 * {
 	margin: 0;
@@ -154,35 +120,52 @@ main {
 	color: var(--text-primary);
 }
 
-.pause {
-	display: block;
-	margin: 0;
-	background-color: var(--accent-red);
-	color: var(--text-primary);
-	padding: 16px 42px;
-	border: 3px solid #7a1f1f;
-	border-radius: 6px;
-	font-size: 1.5em; 
-	font-weight: bold;
-	font-family: 'VT323', monospace;
-	cursor: pointer;
-	transition: background-color 0.2s, transform 0.05s;
+.pause{
+  display:inline-block;
+  margin:0;
+  padding:16px 42px;
+  font-size:1.5em;
+  font-weight:bold;
+  font-family:'VT323', monospace;
+  color:#fff;
+  cursor:pointer;
+  background:#c96565;
+  border:3px solid #7a2f2f;
+  border-radius:4px;
+  box-shadow:
+    inset 0 -4px 0 #7a2f2f,
+    inset 0 2px 0 rgba(255,255,255,.25);
+  transition:transform .05s, box-shadow .05s;
 }
 
-.pause:hover {
-	background-color: var(--accent-red-hover);
+/* ACTIVE CLICK PRESS */
+.pause:active{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 -1px 0 #7a2f2f,
+    inset 0 1px 0 rgba(255,255,255,.25);
 }
 
-.pause.paused {
-	background-color: var(--accent-green);
+.pause:hover{
+  transform:translateY(1px);
+  box-shadow:
+    inset 0 -2px 0 #7a2f2f,
+    inset 0 2px 0 rgba(255,255,255,.25);
 }
 
-.pause.paused:hover {
-	background-color: var(--accent-green-hover);
+/* GREEN STATE WHEN PAUSED */
+.pause.paused{
+  background:#45a049;
+  border-color:#2f6e34;
+  box-shadow:
+    inset 0 -4px 0 #2f6e34,
+    inset 0 2px 0 rgba(255,255,255,.25);
 }
 
-.pause:active {
-  transform: translateY(2px);
+.pause.paused:hover{
+  box-shadow:
+    inset 0 -2px 0 #2f6e34,
+    inset 0 2px 0 rgba(255,255,255,.25);
 }
 
 .egg-source-selector {
@@ -337,7 +320,7 @@ main {
 
 /* Door Panel */
 .door-panel {
-  width: 40%;
+  width: 70%;
   max-width: 1000px; /* same as window-row */
   margin: 10px auto 0;
   display: flex;
