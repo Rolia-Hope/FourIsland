@@ -108,19 +108,6 @@ main {
     text-align: center;
 }
 
-.team-container {
-	  max-width: 1200px;
-	  margin: 0 auto;
-}
-
-.team-container h2 {
-	  background-color: transparent;
-	  margin-bottom: 30px;
-	  font-size: 2em;
-	  text-align: center;
-	  color: var(--text-primary);
-}
-
 .pause {
     display:inline-block;
     margin:0;
@@ -385,15 +372,6 @@ main {
     background-color: rgba(255,255,255,0.1);
     padding: 20px 0;
     border-radius: 4px;
-}
-
-.hatch-counters-row {
-    margin-top: 40px;
-    padding: 30px 40px;
-    background-color: var(--bg-card);
-    border: 6px solid var(--text-brown);
-    width: 400px;
-    text-align: center;
 }
 
 .hatch-counter-value {

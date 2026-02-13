@@ -405,7 +405,7 @@ function editFilter(index) {
 	const criteriaList = document.getElementById('criteriaList');
 	criteriaList.innerHTML = '';
 
-	// Load existing criteria into the modal
+	// Load existing criteria
 	filter.criteria.forEach((criterion) => {
 		addCriteriaInput();
 		const criteriaGroups = document.querySelectorAll('.criteria-input-group');

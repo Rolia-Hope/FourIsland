@@ -341,19 +341,6 @@ main {
 	border-radius: 4px;
 }
 
-.modal-actions {
-	display: flex;
-	gap: 15px;
-	justify-content: flex-end;
-	margin-top: 30px;
-	background-color: transparent;
-}
-
-.modal-actions button {
-	padding: 12px 30px;
-	font-size: 1em;
-}
-
 .hidden {
 	display: none;
 }
@@ -409,21 +396,6 @@ main {
 	padding: 40px;
 	text-align: center;
 	font-size: 1.1em;
-}
-
-.modal-content {
-	background: #4c545c;
-	border: 6px solid #8a531f;
-	box-shadow:
-		inset 0 -8px 0 #2e3238,
-		inset 0 8px 0 #a96a2b;
-	border-radius: 0;
-}
-
-.modal-content h2 {
-	background-color: transparent;
-	color: #eef4ff;
-	margin-bottom: 20px;
 }
 
 .close {
@@ -487,11 +459,5 @@ main {
 
 	.criteria-input-group button {
 		justify-self: start;
-	}
-
-	.modal-content {
-		width: 95%;
-		margin: 20% auto;
-		padding: 20px;
 	}
 }
