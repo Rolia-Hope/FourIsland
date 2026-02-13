@@ -299,7 +299,7 @@ function saveFilter() {
 	saveGameData();
 
 	// Close builder and refresh
-	closeBuilder()
+	closeBuilder();
 	currentFilterBeingEdited = null;
 	renderFilters();
 	updateEmptyMessage();
