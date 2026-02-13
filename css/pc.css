@@ -60,6 +60,7 @@ header a {
 	background-color: var(--text-brown);
 	color: var(--text-primary);
 	padding: 10px 20px;
+	border-radius: 5px;
 	text-decoration: none;
 	font-weight: bold;
 	transition: background-color 0.3s;
@@ -130,7 +131,7 @@ main {
 	border-bottom:2px solid #8b5a2b;
 	padding-bottom:6px;
 	margin-bottom:14px;
-	font-size:32;
+	font-size:32px;
 }
 
 .pc-boxes-container {
@@ -147,7 +148,7 @@ main {
 }
 
 .box-title {
-	background: var(--accent-blue-dark);
+	background: var(--bg-card-highlight);
 	color: var(--text-primary);
 	font-size: 1.3em;
 	text-align: center;

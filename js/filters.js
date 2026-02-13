@@ -30,8 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	const saveCriteriaBtn = document.getElementById('saveCriteriaBtn');
 	const addCriteriaBtn = document.getElementById('addCriteriaBtn');
 	const inlineBuilder = document.getElementById('inlineBuilder');
-	const emptyMsg = document.getElementById("emptyMessage");
-
+	// If the Filters UI is not present on this page, exit early to avoid errors.
+	if (!addFilterBtn || !cancelBtn || !saveCriteriaBtn || !addCriteriaBtn || !inlineBuilder) {
+		return;
+	}
 	addFilterBtn.addEventListener('click', () => {
 		currentFilterBeingEdited = { criteria: [] };
 		document.getElementById('criteriaList').innerHTML = '';

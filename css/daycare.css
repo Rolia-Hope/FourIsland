@@ -146,7 +146,7 @@ main {
 .parent-card h3 {
 	font-size: 1.1em;
 	margin-bottom: 15px;
-	color: var(--accent-gold);
+	color: var(---roof-light);
 }
 
 .select-btn {
@@ -195,7 +195,7 @@ main {
 
 .parent-display p {
 	font-size: 0.9em;
-	color: var(--text-secondary);
+	color: var(--text-muted);
 	min-height: 20px;
 }
 
@@ -231,7 +231,7 @@ main {
 .action-section {
 	text-align: center;
 	padding: 20px;
-	background-color: var(--bg-darker);
+	background-color: var(--bg-border);
 	border-radius: 6px;
 }
 
@@ -262,8 +262,8 @@ main {
 }
 
 .action-btn:disabled {
-	background-color: var(--error-red-hover);
-	color: var(--error-red-hover);
+	background-color: var(--accent-red-hover);
+	color: var(--accent-red-hover);
 	cursor: not-allowed;
 }
 
@@ -293,14 +293,14 @@ main {
 
 .status-text.success {
 	background-color: rgba(81, 207, 102, 0.2);
-	color: var(--success-green);
-	border: 1px solid var(--success-green);
+	color: var(--accent-green);
+	border: 1px solid var(--accent-green);
 }
 
 .status-text.error {
 	background-color: rgba(255, 107, 107, 0.2);
-	color: var(--error-red);
-	border: 1px solid var(--error-red);
+	color: var(--accent-red);
+	border: 1px solid var(--accent-red);
 }
 
 .breeding-info-section.hidden {
@@ -338,12 +338,12 @@ main {
 
 #geneticsPreview li {
 	padding: 5px 0;
-	color: var(--text-secondary);
+	color: var(--text-muted);
 	font-size: 0.9em;
 }
 
 .upgrades-section h2 {
-	color: var(--accent-gold);
+	color: var(--roof-light);
 	margin-bottom: 20px;
 }
 
@@ -354,7 +354,7 @@ main {
 }
 
 .upgrade-card {
-	background-color: var(--bg-darker);
+	background-color: var(--bg-border);
 	border: 2px solid var(--accent-red);
 	border-radius: 6px;
 	padding: 20px;
@@ -367,24 +367,24 @@ main {
 }
 
 .upgrade-card h3 {
-	color: var(--accent-gold);
+	color: var(--roof-light);
 	margin-bottom: 10px;
 	font-size: 1.1em;
 }
 
 .upgrade-card p {
 	margin: 8px 0;
-	color: var(--text-secondary);
+	color: var(--text-muted);
 	font-size: 0.95em;
 }
 
 .upgrade-card p span {
-	color: var(--accent-gold);
+	color: var(--roof-light);
 	font-weight: bold;
 }
 
 .upgrade-description {
-	color: var(--text-secondary);
+	color: var(--text-muted);
 	font-size: 0.9em;
 	margin-bottom: 15px;
 	font-style: italic;
@@ -461,7 +461,7 @@ main {
 }
 
 .modal-header h2 {
-	color: var(--accent-gold);
+	color: var(--roof-light);
 	margin: 0;
 }
 
@@ -512,7 +512,7 @@ main {
 
 .pc-slot-modal:hover:not(.empty) {
 	transform: scale(1.05);
-	border-color: var(--accent-gold);
+	border-color: var(--roof-light);
 }
 
 .pc-slot-modal.empty {
@@ -524,14 +524,14 @@ main {
 	width: 80px;
 	height: 80px;
 	image-rendering: pixelated;
-	background-color: var(--bg-darker);
-	border: 1px solid var(--text-secondary);
+	background-color: var(--bg-border);
+	border: 1px solid var(--text-muted);
 	border-radius: 4px;
 }
 
 .pc-slot-modal p {
 	font-size: 0.85em;
-	color: var(--text-secondary);
+	color: var(--text-muted);
 	word-break: break-word;
 	min-height: 30px;
 	display: flex;

@@ -33,3 +33,11 @@
     --house-wall-purple: #9898D8;
     --house-outline-grey: #404868;
 }
+
+header nav a.active {
+  background:#8b5a2b !important;
+  color:#fff !important;
+  border:3px solid #5a3a1a !important;
+  box-shadow:0 3px 0 #5a3a1a !important;
+  transform:translateY(2px);
+}
