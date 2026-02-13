@@ -1,4 +1,10 @@
 // Global game state - loads from and saves to localStorage
+
+// When true, we are in the middle of an import and
+// must NOT let any automatic saves overwrite the
+// freshly imported data in localStorage.
+let importInProgress = false;
+
 let gameData = {
 	incubator: [],
 	pc: [],
@@ -149,6 +155,15 @@ function loadGameData() {
 
 // Save all data to localStorage
 function saveGameData() {
+	// During an import, other systems (incubator ticks,
+	// daycare, PC, etc.) may still try to call saveGameData.
+	// If we let them run, they could overwrite the freshly
+	// imported localStorage with the old in-memory state
+	// just before the page reloads. Guard against that.
+	if (importInProgress) {
+		return;
+	}
+
 	localStorage.setItem('incubator', JSON.stringify(gameData.incubator));
 	localStorage.setItem('pc', JSON.stringify(gameData.pc));
 	localStorage.setItem('filters', JSON.stringify(gameData.filters));
@@ -424,6 +439,12 @@ async function importSave(file) {
 		if (!confirm('This will overwrite your current save. Continue?')) {
 			return;
 		}
+
+		// From this point on, we are doing a full import.
+		// Block any further automatic calls to saveGameData
+		// so they cannot re-save the previous in-memory state
+		// over the imported one.
+		importInProgress = true;
 
 		// Avoid clobbering imported egg/shiny counters on reload.
 		// The beforeunload handler would otherwise rewrite them with the current
