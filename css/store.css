@@ -1,50 +1,13 @@
 /* Store Page Styling */
 
+@import "global.css";
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen&family=Nunito&display=swap');
-
-:root {
-  /* Roof */
-  --roof-main: #C07A2B;
-  --roof-light: #E3B15A;
-  --roof-dark: #9A5A1E;
-  --roof-outline: #6F3F14;
-
-  /* Backgrounds */
-  --bg-main: #1F2F4A;
-  --bg-panel: #2A3E5F;
-  --bg-card: #3A3F44;
-  --bg-card-highlight: #464747;
-  --bg-border: #141C2F;
-
-  /* Text */
-  --text-primary: #F2F0E6;
-  --text-muted: #B8C1D1;
-  --text-brown: #6B3F1D;
-  --text-hover: #9A4A23;
-
-  /* Accents */
-  --accent-red: #E65A5A;
-  --accent-red-hover: #C58080;
-  --accent-gold: #E3B15A;
-  --accent-green: #45a049;
-  --accent-green-hover: #51CF66;
-  --accent-blue: #4A90E2;
-  --accent-blue-hover: #6BA0E8;
-  --accent-blue-dark: #2A3E5F;
-}
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-}
-
-body {
-	background-color: var(--bg-main);
-	color: var(--text-primary);
-	font-family: 'VT323', monospace;
-	text-rendering: pixelated;
-	line-height: 1.6;
+	box-shadow:none !important;
 }
 
 header {
@@ -96,81 +59,98 @@ header a:hover {
 	background-color: var(--text-hover);
 }
 
+body {
+	background: linear-gradient(
+		to bottom,
+		var(--house-wall-grey) 0%,
+		var(--house-wall-grey) 75%,
+		var(--house-wall-purple) 75%,
+		var(--house-wall-purple) 100%
+	);
+	box-shadow:
+		inset 0 20px 0 rgba(255,255,255,0.15),
+		inset 0 -20px 0 rgba(0,0,0,0.15);
+	color: var(--text-primary);
+	font-family: 'VT323', monospace;
+	text-rendering: pixelated;
+	line-height: 1.6;
+	min-height: 100vh;
+}
+
 main {
 	padding: 40px 20px;
 }
 
 .currency-display {
 	background-color: transparent;
-	margin: 20px 0 30px 0;
+	margin: -40px 0 30px 0;
 	text-align: center;
 }
 
 .currency-display h2 {
-	background-color: transparent;
-	font-size: 1.8em;
-	color: #ffd700;
-	font-weight: bold;
-	margin: 0;
+	color: var(--house-outline-grey);
+  	font-size: 44px;
+  	font-weight: 700;
+  	letter-spacing: 2px;
+  	text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  	text-align: center;
 }
 
 #pokedollarsDisplay {
-	color: #ffd700;
+	color: var(--house-outline-grey);
 	font-weight: bold;
 }
 
 .store-container {
-	background-color: #1a1a1a;
-	border: 2px solid #555;
-	border-radius: 10px;
+	background-color: var(--bg-card);
+	border:6px solid #8b5a2b;
+	border-radius:0;
 	padding: 30px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	box-shadow:
+		inset 0 0 0 3px #2e3440,
+		0 6px 0 #5a3a1a;
 }
 
 .store-container h2 {
 	background-color: transparent;
 	font-size: 2em;
-	color: #ff6b6b;
-	margin-bottom: 30px;
+	color: var(--text-primary);
+	margin-bottom:25px;
 	text-align: center;
+	border-bottom:4px solid #8b5a2b;
+	padding-bottom:10px;
 }
 
 .upgrades-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 25px;
+	gap:20px;
 	margin-top: 30px;
 }
 
 .upgrade-card {
-	background-color: #2a2a2a;
-	border: 2px solid #ff6b6b;
-	border-radius: 8px;
+	background:var(--bg-main);
+	border:4px solid #8b5a2b;
+	border-radius:0;
 	padding: 25px;
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-	box-shadow: 0 2px 6px rgba(255, 107, 107, 0.2);
-	transition: all 0.3s ease;
-}
-
-.upgrade-card:hover {
-	border-color: #ff5252;
-	box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-	transform: translateY(-5px);
+	box-shadow: inset 0 0 0 2px #1c2a44;
+	transition:none;
 }
 
 .upgrade-card h3 {
 	background-color: transparent;
 	font-size: 1.5em;
-	color: #ff6b6b;
+	color: var(--text-primary);
 	margin: 0;
 }
 
 .upgrade-description {
 	background-color: transparent;
-	color: #bbb;
-	font-style: italic;
+	color:#b8c1d1;
+	font-style:normal;
 	margin: 0;
 	font-size: 0.95em;
 }
@@ -184,31 +164,33 @@ main {
 }
 
 .upgrade-bonus {
-	background-color: #1a1a1a;
-	color: #4CAF50;
+	background:var(--bg-panel);
+	color:#7CFC9A;
 	padding: 12px;
-	border-radius: 5px;
+	border-radius:0;
 	margin: 0;
 	font-weight: bold;
 	text-align: center;
+	border:2px solid #3ba55d;
 	border-left: 4px solid #4CAF50;
 }
 
 .buy-button {
-	background-color: #ff6b6b;
-	color: #fff;
-	border: none;
+	background:#c65b5b;
+	color: var(--text-primary);
+	border:3px solid #8b2e2e;
 	padding: 12px 20px;
-	border-radius: 5px;
+	border-radius:0;
 	font-size: 1em;
 	font-weight: bold;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	margin-top: auto;
+	box-shadow:0 3px 0 #6e2020;
 }
 
 .buy-button:hover:not(:disabled) {
-	background-color: #ff5252;
+	background:#d96b6b;
 	box-shadow: 0 2px 6px rgba(255, 107, 107, 0.4);
 }
 
@@ -219,7 +201,11 @@ main {
 	opacity: 0.6;
 }
 
-/* Responsive */
+.buy-button:active:not(:disabled){
+	transform:translateY(3px);
+	box-shadow:none;
+}
+
 @media (max-width: 768px) {
 	header {
 		flex-direction: column;

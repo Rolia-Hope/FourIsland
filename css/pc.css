@@ -21,24 +21,6 @@ small {
 	color: var(--text-muted);
 }
 
-body {
-  background: linear-gradient(
-    to bottom,
-    var(--house-wall-grey) 0%,
-    var(--house-wall-grey) 75%,
-    var(--house-wall-purple) 75%,
-    var(--house-wall-purple) 100%
-  );
-  box-shadow:
-    inset 0 20px 0 rgba(255,255,255,0.15),
-    inset 0 -20px 0 rgba(0,0,0,0.15);
-  color: var(--text-primary);
-  font-family: 'VT323', monospace;
-  text-rendering: pixelated;
-  line-height: 1.6;
-  min-height: 100vh;
-}
-
 header {
 	background:
     	repeating-linear-gradient(
@@ -87,6 +69,24 @@ header a:hover {
 	background-color: var(--text-hover);
 }
 
+body {
+	background: linear-gradient(
+		to bottom,
+		var(--house-wall-grey) 0%,
+		var(--house-wall-grey) 75%,
+		var(--house-wall-purple) 75%,
+		var(--house-wall-purple) 100%
+	);
+	box-shadow:
+		inset 0 20px 0 rgba(255,255,255,0.15),
+		inset 0 -20px 0 rgba(0,0,0,0.15);
+	color: var(--text-primary);
+	font-family: 'VT323', monospace;
+	text-rendering: pixelated;
+	line-height: 1.6;
+	min-height: 100vh;
+}
+
 main {
 	padding: 0px 20px 40px 20px;
 }
@@ -96,44 +96,54 @@ main {
 	margin: 0 auto;
 	display: grid;
 	gap: 28px;
+	background:var(--bg-card-highlight);
+	border:6px solid #8b5a2b;
+  	padding:20px;
+  	box-shadow: inset 0 0 0 3px #2e3440;
 }
 
 .pc-container h2 {
-  color: var(--house-outline-grey);
-  font-size: 46px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 0 rgba(0,0,0,0.25);
-  text-align: center;
+	color: var(--text-primary);
+	font-size: 46px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+	text-align: center;
 }
 
 .pc-box {
-	background:
-		linear-gradient(var(--bg-panel), var(--bg-panel)) padding-box,
-		linear-gradient(to bottom, var(--roof-light), var(--roof-dark)) border-box;
-	border: 6px solid transparent;
+	background:#2f4363;
+	border:4px solid #8b5a2b;
 	border-radius: 6px;
 	padding: 18px;
 	box-shadow:
 		inset 0 0 0 3px var(--roof-outline),
 		inset 0 -6px 0 rgba(0,0,0,0.35),
 		0 6px 0 rgba(0,0,0,0.4);
+	margin-bottom:24px;
 }
 
-/* Individual PC Box */
-.pc-box {
-  	background-color: var(--bg-main);
-  	border: 6px solid var(--text-brown);
-  	box-shadow:
-    	inset 0 6px 0 rgba(0,0,0,0.3),
-    	0 4px 0 rgba(0,0,0,0.3);
-	margin: 0 6px;
+.pc-box h3,
+.pc-box-title{
+	text-align:center;
+	color:#e5e9f0;
+	border-bottom:2px solid #8b5a2b;
+	padding-bottom:6px;
+	margin-bottom:14px;
+	font-size:32;
 }
 
 .pc-boxes-container {
 	display: flex;
 	flex-direction: column;
 	gap: 28px;
+}
+
+.pc-boxes-container > div{
+	background:var(--bg-main);
+	border:4px solid #8b5a2b;
+	padding:16px;
+	margin-bottom:24px;
 }
 
 .box-title {
@@ -147,19 +157,20 @@ main {
 	box-shadow: inset 0 -3px 0 var(--roof-outline);
 }
 
-/* PC Grid Layout - 6 columns (30 boxes = 6 columns x 5 rows per box) */
 .pc-grid {
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
-	gap: 15px;
-	background: #1b2b44;
+	gap:18px; 
+	background: var(--bg-card-highlight);
 	padding: 12px;
 	border-radius: 6px;
-	box-shadow: inset 0 0 0 3px #142136;
+	box-shadow:
+		inset 0 0 0 3px var(--roof-outline),
+		inset 0 -6px 0 rgba(0,0,0,.35);
 }
 
 .pc-slot {
-	background: #243a5c;
+	background:var(--bg-main); 
 	border: 3px solid var(--roof-dark);
 	border-radius: 4px;
 	box-shadow:
@@ -174,21 +185,20 @@ main {
 }
 
 .pc-slot:hover {
-	background-color: var(--bg-card-highlight);
+	background-color: color-mix(in srgb, var(--bg-panel) 85%, white);
 	border-color: var(--text-brown);
 	box-shadow:
 		inset 0 0 0 2px var(--accent-blue),
 		0 0 8px var(--accent-blue);
 }
 
-/* Selected slot for swapping */
 .pc-slot.selected {
+	background-color: color-mix(in srgb, var(--bg-panel) 70%, lime);
 	border-color: #00ff00;
 	border-width: 3px;
 	box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
-/* Daycare parent pokemon - Blue border */
 .pc-slot.daycare-pokemon {
 	border-color: #00a8ff;
 	border-width: 3px;
@@ -200,9 +210,8 @@ main {
 	box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
 }
 
-/* Shiny Pokemon - Yellowish background */
 .pc-slot.shiny-pokemon {
-	background-color: #4a4a2a;
+	background-color: color-mix(in srgb, var(--bg-panel) 75%, gold);
 }
 
 .pc-slot.shiny-pokemon:hover {
@@ -210,13 +219,11 @@ main {
 	border-color: #ffff00;
 }
 
-/* Alpha Pokemon - Red sprite effect */
 .pc-slot.alpha-pokemon .pc-pokemon-sprite {
 	filter: drop-shadow(0 0 3px #ff4444) drop-shadow(0 0 6px #ff2222);
 	outline-offset: 2px;
 }
 
-/* Empty Slot */
 .empty-pokemon-slot {
 	width: 100%;
 	height: 100%;
@@ -228,7 +235,6 @@ main {
 	background-color: transparent;
 }
 
-/* Shiny/Alpha Indicators */
 .indicators {
 	position: absolute;
 	top: 5px;
@@ -248,7 +254,6 @@ main {
 	justify-content: center;
 }
 
-/* Modal Styling */
 .modal {
 	display: none;
 	position: fixed;
@@ -261,18 +266,9 @@ main {
 	animation: fadeIn 0.3s;
 }
 
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
 .modal-content {
 	background:
-		linear-gradient(var(--bg-panel), var(--bg-panel)) padding-box,
+		linear-gradient(var(--bg-card-highlight), var(--bg-card-highlight)) padding-box,
 		linear-gradient(to bottom, var(--roof-light), var(--roof-dark)) border-box;
 	border: 6px solid transparent;
 	border-radius: 6px;
@@ -304,7 +300,6 @@ main {
 	color: var(--accent-red);
 }
 
-/* Pokemon Details */
 .pokemon-details {
 	display: flex;
 	gap: 30px;
@@ -356,6 +351,15 @@ main {
 	line-height: 1.6;
 }
 
+.pokemon-info h4 {
+	background-color: transparent;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 1.1em;
+  	opacity:.85;
+  	letter-spacing:1px;
+}
+
 .shiny-text {
 	color: #ffd700 !important;
 	font-weight: bold;
@@ -366,16 +370,6 @@ main {
 	color: var(--accent-blue) !important;
 	font-weight: bold;
 	text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
-}
-
-/* IVs List */
-.pokemon-info h4 {
-	background-color: transparent;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	font-size: 1.1em;
-  	opacity:.85;
-  	letter-spacing:1px;
 }
 
 .iv-list {
@@ -404,7 +398,150 @@ main {
 	font-style: italic;
 }
 
-/* Responsive Design */
+#evolutionBtn {
+	display:inline-block;
+	margin:0;
+	padding: 12px 24px;
+	font-size: 1.2em;
+	font-weight:bold;
+	font-family:'VT323', monospace;
+	color: var(--text-primary);
+	cursor:pointer;
+	background:#c96565;
+	border:3px solid #7a2f2f;
+	border-radius: 4px;
+	box-shadow:
+		inset 0 -4px 0 #7a2f2f,
+		inset 0 2px 0 rgba(255,255,255,.25);
+	transition: background-color 0.3s;
+}
+
+#evolutionBtn:hover:not(:disabled) {
+	background-color: var(--accent-red-hover);
+}
+
+#evolutionBtn:disabled {
+	background-color: #999;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+button:active {
+	transform: translateY(2px);
+	box-shadow:
+		inset 0 -2px 0 #7a2f2f,
+		inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+#daycareBtn {
+  	display:inline-block;
+  	padding: 12px 24px;
+ 	font-size: 1.2em;
+  	font-weight:bold;
+  	font-family:'VT323', monospace;
+  	color:var(--text-primary);
+  	cursor:pointer;
+  	background:#5cb85c;
+  	border:3px solid #2e7d32;
+	border-radius: 4px;
+  	box-shadow:
+    	inset 0 -4px 0 #2e7d32,
+    	inset 0 2px 0 rgba(255,255,255,.25);
+  	transition: background-color 0.3s;
+}
+
+#daycareBtn:hover {
+	background-color: var(--accent-green-hover);
+}
+
+#daycareBtn:disabled {
+	background-color: #999;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+#releaseBtn {
+	display:inline-block;
+	margin:0;
+	padding: 12px 24px;
+	font-size: 1.2em;
+	font-weight:bold;
+	font-family:'VT323', monospace;
+	color:var(--text-primary);
+	cursor:pointer;
+	background:#c96565;
+	border:3px solid #7a2f2f;
+	border-radius: 4px;
+	box-shadow:
+		inset 0 -4px 0 #7a2f2f,
+		inset 0 2px 0 rgba(255,255,255,.25);
+	transition: background-color 0.3s;
+}
+
+#releaseBtn:hover {
+	background-color: #d43c2d;
+}
+
+.evolution-options {
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.evolution-choice-btn {
+	display:inline-block;
+	margin:0;
+	padding: 12px 24px;
+	font-size: 1.2em;
+	font-weight:bold;
+	font-family:'VT323', monospace;
+	color:var(--text-primary);
+	cursor:pointer;
+	background:#c96565;
+	border:3px solid #7a2f2f;
+	border-radius: 4px;
+	box-shadow:
+		inset 0 -4px 0 #7a2f2f,
+		inset 0 2px 0 rgba(255,255,255,.25);
+	transition: background-color 0.3s;
+}
+
+.evolution-choice-btn:hover {
+	background-color: var(--accent-red-hover);
+}
+
+.evolution-cancel-btn {
+	display:inline-block;
+	margin:0;
+	padding: 12px 24px;
+	font-size: 1.2em;
+	font-weight:bold;
+	font-family:'VT323', monospace;
+	color:var(--text-primary);
+	cursor:pointer;
+	background:#c96565;
+	border:3px solid #7a2f2f;
+	border-radius: 4px;
+	box-shadow:
+		inset 0 -4px 0 #7a2f2f,
+		inset 0 2px 0 rgba(255,255,255,.25);
+	transition: background-color 0.3s;
+}
+
+.evolution-cancel-btn:hover {
+	background-color: #666;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 @media (max-width: 1200px) {
 	.pc-grid {
 		grid-template-columns: repeat(5, 1fr);
@@ -450,140 +587,4 @@ main {
 	header h1 {
 		font-size: 1.8em;
 	}
-}
-
-/* Evolution Styles */
-#evolutionBtn {
-  display:inline-block;
-  margin:0;
-  padding: 12px 24px;
-  font-size: 1.2em;
-  font-weight:bold;
-  font-family:'VT323', monospace;
-  color: var(--text-primary);
-  cursor:pointer;
-  background:#c96565;
-  border:3px solid #7a2f2f;
-  border-radius: 4px;
-  box-shadow:
-    inset 0 -4px 0 #7a2f2f,
-    inset 0 2px 0 rgba(255,255,255,.25);
-  transition: background-color 0.3s;
-}
-
-button:active {
-	transform: translateY(2px);
-	box-shadow:
-		inset 0 -2px 0 #7a2f2f,
-		inset 0 1px 0 rgba(255,255,255,.25);
-}
-
-#evolutionBtn:hover:not(:disabled) {
-	background-color: var(--accent-red-hover);
-}
-
-#evolutionBtn:disabled {
-	background-color: #999;
-	cursor: not-allowed;
-	opacity: 0.6;
-}
-
-#daycareBtn {
-  	display:inline-block;
-  	padding: 12px 24px;
- 	font-size: 1.2em;
-  	font-weight:bold;
-  	font-family:'VT323', monospace;
-  	color:var(--text-primary);
-  	cursor:pointer;
-  	background:#5cb85c;
-  	border:3px solid #2e7d32;
-	border-radius: 4px;
-  	box-shadow:
-    	inset 0 -4px 0 #2e7d32,
-    	inset 0 2px 0 rgba(255,255,255,.25);
-  	transition: background-color 0.3s;
-}
-
-#daycareBtn:hover {
-	background-color: var(--accent-green-hover);
-}
-
-#daycareBtn:disabled {
-	background-color: #999;
-	cursor: not-allowed;
-	opacity: 0.6;
-}
-
-#releaseBtn {
-  display:inline-block;
-  margin:0;
-  padding: 12px 24px;
-  font-size: 1.2em;
-  font-weight:bold;
-  font-family:'VT323', monospace;
-  color:var(--text-primary);
-  cursor:pointer;
-  background:#c96565;
-  border:3px solid #7a2f2f;
-  border-radius: 4px;
-  box-shadow:
-    inset 0 -4px 0 #7a2f2f,
-    inset 0 2px 0 rgba(255,255,255,.25);
-  transition: background-color 0.3s;
-}
-
-#releaseBtn:hover {
-	background-color: #d43c2d;
-}
-
-.evolution-options {
-	background-color: transparent;
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-}
-
-.evolution-choice-btn {
-  display:inline-block;
-  margin:0;
-  padding: 12px 24px;
-  font-size: 1.2em;
-  font-weight:bold;
-  font-family:'VT323', monospace;
-  color:var(--text-primary);
-  cursor:pointer;
-  background:#c96565;
-  border:3px solid #7a2f2f;
-  border-radius: 4px;
-  box-shadow:
-    inset 0 -4px 0 #7a2f2f,
-    inset 0 2px 0 rgba(255,255,255,.25);
-  transition: background-color 0.3s;
-}
-
-.evolution-choice-btn:hover {
-	background-color: var(--accent-red-hover);
-}
-
-.evolution-cancel-btn {
-  display:inline-block;
-  margin:0;
-  padding: 12px 24px;
-  font-size: 1.2em;
-  font-weight:bold;
-  font-family:'VT323', monospace;
-  color:var(--text-primary);
-  cursor:pointer;
-  background:#c96565;
-  border:3px solid #7a2f2f;
-  border-radius: 4px;
-  box-shadow:
-    inset 0 -4px 0 #7a2f2f,
-    inset 0 2px 0 rgba(255,255,255,.25);
-  transition: background-color 0.3s;
-}
-
-.evolution-cancel-btn:hover {
-	background-color: #666;
 }

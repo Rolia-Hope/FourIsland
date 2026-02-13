@@ -1,50 +1,12 @@
 /* Daycare Page Styling */
 
+@import "global.css";
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen&family=Nunito&display=swap');
-
-:root {
-  /* Roof */
-  --roof-main: #C07A2B;
-  --roof-light: #E3B15A;
-  --roof-dark: #9A5A1E;
-  --roof-outline: #6F3F14;
-
-  /* Backgrounds */
-  --bg-main: #1F2F4A;
-  --bg-panel: #2A3E5F;
-  --bg-card: #3A3F44;
-  --bg-card-highlight: #464747;
-  --bg-border: #141C2F;
-
-  /* Text */
-  --text-primary: #F2F0E6;
-  --text-muted: #B8C1D1;
-  --text-brown: #6B3F1D;
-  --text-hover: #9A4A23;
-
-  /* Accents */
-  --accent-red: #E65A5A;
-  --accent-red-hover: #C58080;
-  --accent-gold: #E3B15A;
-  --accent-green: #45a049;
-  --accent-green-hover: #51CF66;
-  --accent-blue: #4A90E2;
-  --accent-blue-hover: #6BA0E8;
-  --accent-blue-dark: #2A3E5F;
-}
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-}
-
-body {
-	background-color: var(--bg-main);
-	color: var(--text-primary);
-	font-family: 'VT323', monospace;
-	text-rendering: pixelated;
-	line-height: 1.6;
 }
 
 header {
@@ -96,11 +58,28 @@ header a:hover {
 	background-color: var(--text-hover);
 }
 
+body {
+	background: linear-gradient(
+		to bottom,
+		var(--house-wall-grey) 0%,
+		var(--house-wall-grey) 75%,
+		var(--house-wall-purple) 75%,
+		var(--house-wall-purple) 100%
+	);
+	box-shadow:
+		inset 0 20px 0 rgba(255,255,255,0.15),
+		inset 0 -20px 0 rgba(0,0,0,0.15);
+	color: var(--text-primary);
+	font-family: 'VT323', monospace;
+	text-rendering: pixelated;
+	line-height: 1.6;
+	min-height: 100vh;
+}
+
 main {
 	padding: 40px 20px;
 }
 
-/* Info Section */
 .info-section {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -109,16 +88,20 @@ main {
 }
 
 .info-card {
-	background-color: var(--bg-card);
-	border: 2px solid var(--accent-red);
-	border-radius: 8px;
+	background-color: var(--bg-main);
+	border: 6px solid var(--text-brown);
+	border-radius: 0;
+	box-shadow:
+		inset 0 6px 0 rgba(255,255,255,0.12),
+		inset 0 -6px 0 rgba(0,0,0,0.35),
+		0 4px 0 rgba(0,0,0,0.4);
 	padding: 20px;
 	text-align: center;
 }
 
 .info-card h3 {
 	font-size: 1.1em;
-	color: var(--accent-gold);
+	color: var(--text-primary);
 	margin-bottom: 10px;
 }
 
@@ -127,13 +110,19 @@ main {
 	color: var(--text-primary);
 }
 
-/* Selection Section */
-.selection-section {
+.selection-section,
+.breeding-info-section,
+.upgrades-section {
 	background-color: var(--bg-card);
-	border: 2px solid var(--accent-red);
-	border-radius: 8px;
-	padding: 30px;
-	margin-bottom: 30px;
+	border: 6px solid var(--text-brown);
+	border-radius: 0;
+	box-shadow:
+		inset 0 6px 0 rgba(255,255,255,0.12),
+		inset 0 -6px 0 rgba(0,0,0,0.35),
+		0 4px 0 rgba(0,0,0,0.4);
+	padding: 25px;
+	margin-bottom: 25px;
+	animation: fadeIn .25s ease;
 }
 
 .parent-selection {
@@ -144,11 +133,14 @@ main {
 }
 
 .parent-card {
-	background-color: var(--bg-darker);
-	border: 1px solid var(--text-secondary);
-	border-radius: 6px;
+	background-color: var(--bg-main);
+	border: 6px solid var(--text-brown);
+	border-radius: 0;
 	padding: 20px;
 	text-align: center;
+	box-shadow:
+		inset 0 6px 0 rgba(0,0,0,0.3),
+		0 4px 0 rgba(0,0,0,0.3);
 }
 
 .parent-card h3 {
@@ -184,19 +176,6 @@ main {
 	display: none;
 }
 
-/* Frame around the sprite (box), not around text */
-.parent-sprite-frame {
-	border: 2px solid var(--accent-red);
-	border-radius: 4px;
-	padding: 10px;
-	background-color: var(--bg-card);
-	box-sizing: content-box;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-}
-
-/* The sprite itself stays transparent so alpha glow hugs pixels */
 .parent-display .parent-sprite {
 	width: 96px;
 	height: 96px;
@@ -205,13 +184,11 @@ main {
 	background-color: transparent;
 }
 
-/* Shiny parent - yellow background */
 .parent-display.shiny-parent .parent-sprite-frame {
 	background-color: #4a4a2a;
 	border-color: #ffff00;
 }
 
-/* Alpha parent - red aura effect around sprite only */
 .parent-display.alpha-parent .parent-sprite {
 	filter: drop-shadow(0 0 3px #ff4444) drop-shadow(0 0 6px #ff2222);
 }
@@ -222,19 +199,33 @@ main {
 	min-height: 20px;
 }
 
+.parent-sprite-frame {
+	border: 4px solid var(--roof-outline);
+	border-radius: 0;
+	padding: 10px;
+	background-color: var(--bg-main);
+	box-shadow:
+		inset 0 4px 0 rgba(255,255,255,0.15),
+		inset 0 -4px 0 rgba(0,0,0,0.35);
+}
+
 .clear-btn {
-	background-color: #666;
-	color: white;
-	border: none;
-	padding: 5px 10px;
+	background: #c96565;
+	border: 3px solid #7a2f2f;
 	border-radius: 4px;
+	color: var(--text-primary);
+	padding: 12px 30px;
+	font-weight: bold;
+	font-size: 1.2em;
 	cursor: pointer;
-	font-size: 0.85em;
-	transition: background-color 0.3s;
+	box-shadow:
+		inset 0 -4px 0 #7a2f2f,
+		inset 0 2px 0 rgba(255,255,255,.25);
+	transition: transform .05s, box-shadow .05s;
 }
 
 .clear-btn:hover {
-	background-color: #555;
+	background-color: var(--accent-red-hover);
 }
 
 .action-section {
@@ -245,34 +236,52 @@ main {
 }
 
 .action-btn {
-	background-color: var(--accent-gold);
-	color: #000;
-	border: none;
-	padding: 12px 30px;
+	background: var(--accent-green);
+	border: 3px solid var(--accent-green-dark);
 	border-radius: 4px;
-	cursor: pointer;
+	color: var(--text-primary);
+	padding: 12px 30px;
 	font-weight: bold;
-	font-size: 1em;
-	transition: background-color 0.3s;
+	font-size: 1.2em;
+	cursor: pointer;
+	box-shadow:
+		inset 0 -4px 0 var(--accent-green-dark),
+		inset 0 2px 0 rgba(255,255,255,.25);
+	transition: transform .05s, box-shadow .05s;
 }
 
-.action-btn:hover:not(:disabled) {
-	background-color: #ffed4e;
+.action-btn:hover:not(:disabled){
+  	transform: translateY(1px);
+}
+
+.action-btn:active:not(:disabled){
+	transform: translateY(2px);
+	box-shadow:
+		inset 0 -1px 0 #7a2f2f,
+		inset 0 1px 0 rgba(255,255,255,.25);
 }
 
 .action-btn:disabled {
-	background-color: #888;
-	color: #666;
+	background-color: var(--error-red-hover);
+	color: var(--error-red-hover);
 	cursor: not-allowed;
 }
 
 .action-btn.pause {
-	background-color: var(--error-red);
-	color: #fff;
+	background-color: var(--accent-red-hover);
+	border: 3px solid var(--accent-red);
+	box-shadow:
+    	inset 0 -4px 0 var(--accent-red),
+    	inset 0 2px 0 rgba(255,255,255,.25);
+	color: var(--text-primary);
 }
 
 .action-btn.pause:hover:not(:disabled) {
 	background-color: #ff5252;
+	border: 3px solid var(--accent-red);
+	box-shadow:
+    	inset 0 -4px 0 var(--accent-red),
+    	inset 0 2px 0 rgba(255,255,255,.25);
 }
 
 .status-text {
@@ -294,22 +303,15 @@ main {
 	border: 1px solid var(--error-red);
 }
 
-/* Breeding Info Section */
-.breeding-info-section {
-	background-color: var(--bg-card);
-	border: 2px solid var(--accent-gold);
-	border-radius: 8px;
-	padding: 30px;
-	margin-bottom: 30px;
-}
-
 .breeding-info-section.hidden {
 	display: none;
 }
 
 .breeding-info-section h2 {
-	color: var(--accent-gold);
-	margin-bottom: 20px;
+	font-weight: bold;
+	margin-bottom: 12px;
+	position: relative;
+	z-index: 1;
 }
 
 .breeding-grid {
@@ -319,7 +321,13 @@ main {
 }
 
 .breeding-grid .info-card {
-	border-color: var(--accent-gold);
+	background-color: var(--bg-main);
+	border: 6px solid var(--text-brown);
+	border-radius: 0;
+	box-shadow:
+		inset 0 6px 0 rgba(255,255,255,0.12),
+		inset 0 -6px 0 rgba(0,0,0,0.35),
+		0 4px 0 rgba(0,0,0,0.4);
 }
 
 #geneticsPreview {
@@ -332,14 +340,6 @@ main {
 	padding: 5px 0;
 	color: var(--text-secondary);
 	font-size: 0.9em;
-}
-
-/* Upgrades Section */
-.upgrades-section {
-	background-color: var(--bg-card);
-	border: 2px solid var(--accent-red);
-	border-radius: 8px;
-	padding: 30px;
 }
 
 .upgrades-section h2 {
@@ -372,13 +372,6 @@ main {
 	font-size: 1.1em;
 }
 
-.upgrade-description {
-	color: var(--text-secondary);
-	font-size: 0.9em;
-	margin-bottom: 15px;
-	font-style: italic;
-}
-
 .upgrade-card p {
 	margin: 8px 0;
 	color: var(--text-secondary);
@@ -388,6 +381,13 @@ main {
 .upgrade-card p span {
 	color: var(--accent-gold);
 	font-weight: bold;
+}
+
+.upgrade-description {
+	color: var(--text-secondary);
+	font-size: 0.9em;
+	margin-bottom: 15px;
+	font-style: italic;
 }
 
 .buy-button {
@@ -413,7 +413,6 @@ main {
 	cursor: not-allowed;
 }
 
-/* Modal */
 .modal {
 	display: none;
 	position: fixed;
@@ -436,15 +435,19 @@ main {
 }
 
 .modal-content {
-	background-color: var(--bg-darker);
-	border: 2px solid var(--accent-red);
-	border-radius: 8px;
+	background-color: var(--bg-card);
+	border: 8px solid var(--roof-outline);
+	border-radius: 0;
 	width: 90%;
 	max-width: 1000px;
 	max-height: 90vh;
 	overflow-y: auto;
 	display: flex;
 	flex-direction: column;
+	box-shadow:
+		inset 0 10px 0 rgba(255,255,255,0.12),
+		inset 0 -10px 0 rgba(0,0,0,0.35),
+		0 8px 0 rgba(0,0,0,0.4);
 }
 
 .modal-header {
@@ -460,6 +463,12 @@ main {
 .modal-header h2 {
 	color: var(--accent-gold);
 	margin: 0;
+}
+
+.modal-body {
+	padding: 20px;
+	overflow-y: auto;
+	flex-grow: 1;
 }
 
 .close-btn {
@@ -479,12 +488,6 @@ main {
 
 .close-btn:hover {
 	color: var(--accent-red);
-}
-
-.modal-body {
-	padding: 20px;
-	overflow-y: auto;
-	flex-grow: 1;
 }
 
 .pc-grid-modal {
@@ -542,7 +545,6 @@ main {
 	min-height: auto !important;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
 	header {
 		flex-direction: column;
