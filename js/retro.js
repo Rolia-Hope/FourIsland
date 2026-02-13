@@ -146,15 +146,17 @@ function rollRetroSprite(pokemonGen, parent1Retro = null, parent2Retro = null) {
     for (const retro of applicableRetros) {
         let p = 1 / retro.probability; // Base chance (1 in X)
 
-        // Apply parent multipliers if provided
+        // Apply parent multipliers if genetics multipliers for retro are enabled
         let count = 0;
         if (parent1Retro && parent1Retro !== 'base' && parent1Retro === retro.name) count++;
         if (parent2Retro && parent2Retro !== 'base' && parent2Retro === retro.name) count++;
 
-        if (count === 1 && typeof DAYCARE_BALANCE !== 'undefined') {
-            p *= DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.one; // 2x
-        } else if (count === 2 && typeof DAYCARE_BALANCE !== 'undefined') {
-            p *= DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.two; // 5x
+        if (typeof DAYCARE_BALANCE !== 'undefined' && DAYCARE_BALANCE.GENETICS_MULTIPLIERS && DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro && DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.enabled) {
+            if (count === 1) {
+                p *= DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.one; // 2x
+            } else if (count === 2) {
+                p *= DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro.two; // 5x
+            }
         }
 
         // Clamp to max 100%
