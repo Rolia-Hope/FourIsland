@@ -25,17 +25,28 @@
         <input type="file" id="importSaveFile" accept=".fis" style="display: none;">
       </div>
       <nav>
+        <a href="index.html" class="active">Incubator</a>
         <a href="src/filters.html">Filters</a>
         <a href="src/pc.html">PC</a>
         <a href="src/store.html">Store</a>
         <a href="src/daycare.html">Daycare</a>
       </nav>
     </header>
-    <main>
-      <div class="team-container">
-        <h2>Your Incubators</h2>
-        <div class="controls">
+    <main class="house-layout">
+
+      <!-- HOUSE BODY -->
+      <section class="house-body">
+
+        <!-- TITLE (centered like above door) -->
+        <div class="house-title">
+          <h2>Your Incubators</h2>
+        </div>
+
+        <!-- PORCH / CONTROL BAR -->
+        <div class="house-controls">
           <button class="pause" type="button">Pause</button>
+
+          <!-- EGG SOURCE SELECTOR -->
           <div class="egg-source-selector">
             <label for="eggSource">Egg Source:</label>
             <select id="eggSource">
@@ -44,39 +55,34 @@
             </select>
           </div>
         </div>
-        <div class="incubators">
-          <div class="egg-slot">
-            <!-- Egg Slot 1-->
-          </div>
-          <div class="egg-slot">
-            <!-- Egg Slot 2-->
-          </div>
-          <div class="egg-slot">
-            <!-- Egg Slot 3-->
-          </div>
-          <div class="egg-slot">
-            <!-- Egg Slot 4-->
-          </div>
-          <div class="egg-slot">
-            <!-- Egg Slot 5-->
-          </div>
-          <div class="egg-slot">
-            <!-- Egg Slot 6-->
-          </div>
+
+        <!-- WINDOW ROW (Incubators) -->
+        <div class="window-row">
+          <div class="egg-slot"></div>
+          <div class="egg-slot"></div>
+          <div class="egg-slot"></div>
+          <div class="egg-slot"></div>
+          <div class="egg-slot"></div>
+          <div class="egg-slot"></div>
         </div>
 
-        <div class="hatch-counters-row">
-          <div class="hatch-counters">
+        <!-- DOOR PANEL (Stats Section) -->
+        <div class="door-panel">
+          <div class="door-inner">
+
             <div class="hatch-counter">
               <div class="hatch-counter-label">Eggs Hatched</div>
               <div class="hatch-counter-value" id="eggHatchedCount">0</div>
             </div>
+
             <div class="hatch-counter">
               <div class="hatch-counter-label">Shinies Hatched</div>
               <div class="hatch-counter-value" id="shinyHatchedCount">0</div>
             </div>
+
           </div>
         </div>
-      </div>
+
+      </section>
     </main>
   </body>

@@ -14,12 +14,13 @@
 
   <body>
     <header>
-      <h1>Pokemon Filters</h1>
+      <h1>Four Island - Pokemon Filters</h1>
       <nav>
         <a href="../index.html">Incubator</a>
-        <a href="pc.html">PC</a>
-        <a href="store.html">Store</a>
-        <a href="daycare.html">Daycare</a>
+			  <a href="filters.html" class="active">Filters</a>
+			  <a href="pc.html">PC</a>
+			  <a href="store.html">Store</a>
+			  <a href="daycare.html">Daycare</a>
       </nav>
     </header>
 
@@ -30,30 +31,21 @@
           <button id="addFilterBtn" class="btn btn-primary">+ Add Filter</button>
         </div>
 
-        <div id="filtersList" class="filters-list">
-          <!-- Filters will be rendered here -->
+        <div id="filtersList" class="filters-list"></div>
+        <div id="emptyMessage" class="empty-message">
+          No filters created yet. Click "Add Filter" to create one.
         </div>
 
-        <!-- Filter Creation Modal -->
-        <div id="filterModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Create Filter</h2>
-            
-            <div class="filter-builder">
-              <div id="criteriaList" class="criteria-list">
-                <!-- Criteria will be added here -->
-              </div>
-
-              <button id="addCriteriaBtn" class="btn btn-secondary">+ Add Criteria</button>
-
-              <div class="modal-actions">
-                <button id="saveCriteriaBtn" class="btn btn-primary">Save Filter</button>
-                <button id="cancelFilterBtn" class="btn btn-secondary">Cancel</button>
-              </div>
-            </div>
+        <!-- Inline Filter Builder -->
+        <div id="inlineBuilder" class="inline-builder hidden">
+          <div id="criteriaList" class="criteria-list"></div>
+          <button id="addCriteriaBtn" class="btn btn-secondary">+ Add Criteria</button>
+          <div class="builder-actions">
+            <button id="saveCriteriaBtn" class="btn btn-primary">Save Filter</button>
+            <button id="cancelFilterBtn" class="btn btn-secondary">Cancel</button>
           </div>
         </div>
+        
       </div>
     </main>
   </body>
