@@ -41,6 +41,130 @@ function getDaycarePokemonName(pokemon) {
 	return name;
 }
 
+// ---------- Genetics odds helpers ----------
+
+function formatOdds(probability) {
+	if (!(probability > 0)) {
+		return '—';
+	}
+	if (probability >= 1) {
+		return '1 in 1 (100%)';
+	}
+	const denom = Math.round(1 / probability);
+	return `1 in ${denom.toLocaleString()}`;
+}
+
+function computeShinyOddsText(parent1, parent2) {
+	if (!BALANCE || !DAYCARE_BALANCE || !DAYCARE_BALANCE.GENETICS_MULTIPLIERS) return 'Shiny: —';
+
+	let multiplier = 1;
+	const shinyConfig = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.shiny;
+	const baseOdds = BALANCE.SHINY_ODDS;
+
+	if (shinyConfig && shinyConfig.enabled) {
+		const shinyParents = (parent1.isShiny ? 1 : 0) + (parent2.isShiny ? 1 : 0);
+		if (shinyParents === 1) {
+			multiplier = shinyConfig.one || 1;
+		} else if (shinyParents === 2) {
+			multiplier = shinyConfig.two || 1;
+		}
+	}
+
+	let p = (1 / baseOdds) * multiplier;
+	if (p > 1) p = 1;
+	const oddsStr = formatOdds(p);
+
+	return `Shiny: ${oddsStr}`;
+}
+
+function computeAlphaOddsText(parent1, parent2) {
+	if (!BALANCE || !DAYCARE_BALANCE || !DAYCARE_BALANCE.GENETICS_MULTIPLIERS) return 'Alpha: —';
+
+	let multiplier = 1;
+	const alphaConfig = DAYCARE_BALANCE.GENETICS_MULTIPLIERS.alpha;
+	const baseOdds = BALANCE.ALPHA_ODDS;
+
+	if (alphaConfig && alphaConfig.enabled) {
+		const alphaParents = (parent1.isAlpha ? 1 : 0) + (parent2.isAlpha ? 1 : 0);
+		if (alphaParents === 1) {
+			multiplier = alphaConfig.one || 1;
+		} else if (alphaParents === 2) {
+			multiplier = alphaConfig.two || 1;
+		}
+	}
+
+	let p = (1 / baseOdds) * multiplier;
+	if (p > 1) p = 1;
+	const oddsStr = formatOdds(p);
+
+	return `Alpha: ${oddsStr}`;
+}
+
+function computeNatureText(parent1, parent2) {
+	const natureConfig = DAYCARE_BALANCE && DAYCARE_BALANCE.GENETICS_MULTIPLIERS && DAYCARE_BALANCE.GENETICS_MULTIPLIERS.nature;
+	if (!natureConfig || !natureConfig.enabled) {
+		return 'Nature: random';
+	}
+
+	if (parent1.nature && parent1.nature === parent2.nature) {
+		const chance = natureConfig.matchChance;
+		return `Nature: ${chance}% ${parent1.nature}, otherwise random`;
+	}
+
+	return 'Nature: random (mixed parents)';
+}
+
+// Compute retro odds for any retro sprites present on the parents.
+// This uses the same multipliers as breeding logic but approximates
+// the final probability as baseOdds * multiplier for that specific
+// retro (which is very close in practice).
+function computeRetroOddsLines(parent1, parent2, eggSpecies) {
+	// RETRO_SPRITES is defined as a global const in retro.js, but
+	// not attached to window. Use typeof check instead of window.*.
+	if (typeof RETRO_SPRITES === 'undefined' || !eggSpecies) return [];
+
+	const retroConfig = DAYCARE_BALANCE && DAYCARE_BALANCE.GENETICS_MULTIPLIERS && DAYCARE_BALANCE.GENETICS_MULTIPLIERS.retro;
+	const enabled = !!(retroConfig && retroConfig.enabled);
+
+	const parentRetros = new Set();
+	if (parent1.retro && parent1.retro !== 'base') parentRetros.add(parent1.retro);
+	if (parent2.retro && parent2.retro !== 'base') parentRetros.add(parent2.retro);
+
+	const lines = [];
+
+	if (parentRetros.size === 0) {
+		// No parent retro; base odds still exist but not specific to these parents.
+		lines.push('Retro: base odds (no parent retro)');
+		return lines;
+	}
+
+	parentRetros.forEach(retroName => {
+		const retro = RETRO_SPRITES[retroName];
+		if (!retro) return;
+		if (eggSpecies.gen > retro.maxGen) return;
+
+		let multiplier = 1;
+		if (enabled) {
+			let count = 0;
+			if (parent1.retro === retroName) count++;
+			if (parent2.retro === retroName) count++;
+			if (count === 1) {
+				multiplier = retroConfig.one || 1;
+			} else if (count === 2) {
+				multiplier = retroConfig.two || 1;
+			}
+		}
+
+		let p = (1 / retro.probability) * multiplier;
+		if (p > 1) p = 1;
+		const oddsStr = formatOdds(p);
+		const displayName = getRetroDisplayName(retroName);
+		lines.push(`Retro (${displayName}): ${oddsStr}`);
+	});
+
+	return lines;
+}
+
 // Update UI
 function updateDaycareUI() {
 	// Update daycare storage capacity
@@ -83,26 +207,38 @@ function updateDaycareUI() {
 			const pokemon2 = gameData.pc[daycare.breeders[1]];
 
 			if (pokemon1 && pokemon2) {
-				// Determine female parent for egg species
-				let femaleParent = pokemon1.gender === 'Female' ? pokemon1 : pokemon2;
-				const femaleSpecies = pokemonDatabase.find(p => p.id === femaleParent.id);
-				
 				// Timer duration
 				const timerDuration = getEggTimerDuration(pokemon1, pokemon2);
 				document.getElementById('timerDuration').textContent = `${Math.round(timerDuration / 1000)}s`;
 
-				// Egg species (from female parent)
-				if (femaleSpecies) {
-					document.getElementById('eggSpecies').textContent = femaleSpecies.name;
+				// Egg species: reuse core breeding rule via helper
+				const eggSpecies = typeof getEggSpeciesFromParents === 'function'
+					? getEggSpeciesFromParents(pokemon1, pokemon2)
+					: null;
+				if (eggSpecies) {
+					document.getElementById('eggSpecies').textContent = eggSpecies.name;
 				}
 
-				// Genetics preview
+				// Genetics preview with odds
 				const geneticsPreview = document.getElementById('geneticsPreview');
+				const shinyText = computeShinyOddsText(pokemon1, pokemon2);
+				const alphaText = computeAlphaOddsText(pokemon1, pokemon2);
+				const natureText = computeNatureText(pokemon1, pokemon2);
+				const retroLines = computeRetroOddsLines(pokemon1, pokemon2, eggSpecies);
+
+				let retroHtml = '';
+				if (retroLines.length === 0) {
+					retroHtml = '<li>Retro: —</li>';
+				} else {
+					retroHtml = retroLines.map(line => `<li>${line}</li>`).join('');
+				}
+
 				geneticsPreview.innerHTML = `
-					<li>Shiny: ${pokemon1.isShiny && pokemon2.isShiny ? '✓ Both' : pokemon1.isShiny || pokemon2.isShiny ? '◐ One' : '✗ None'}</li>
-					<li>Alpha: ${pokemon1.isAlpha && pokemon2.isAlpha ? '✓ Both' : pokemon1.isAlpha || pokemon2.isAlpha ? '◐ One' : '✗ None'}</li>
-					<li>Nature: ${pokemon1.nature === pokemon2.nature ? '✓ ' + pokemon1.nature : '◐ Mixed'}</li>
+					<li>${shinyText}</li>
+					<li>${alphaText}</li>
+					<li>${natureText}</li>
 					<li>IVs: 3+ inherited</li>
+					${retroHtml}
 				`;
 			}
 		}

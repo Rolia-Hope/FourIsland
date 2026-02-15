@@ -285,6 +285,38 @@ function inheritGender(eggSpecies) {
 	}
 }
 
+// Helper: determine the egg species from two parents using the
+// same rules as breeding (female decides, except Ditto cases).
+function getEggSpeciesFromParents(parent1, parent2) {
+	const species1 = pokemonDatabase.find(p => p.id === parent1.id);
+	const species2 = pokemonDatabase.find(p => p.id === parent2.id);
+	if (!species1 || !species2) return null;
+
+	// Determine which parent is female
+	let femaleParent;
+	let maleParent;
+
+	if (parent1.gender === 'Female') {
+		femaleParent = parent1;
+		maleParent = parent2;
+	} else {
+		femaleParent = parent2;
+		maleParent = parent1;
+	}
+
+	const femaleSpecies = pokemonDatabase.find(p => p.id === femaleParent.id);
+	const maleSpecies = pokemonDatabase.find(p => p.id === maleParent.id);
+	if (!femaleSpecies || !maleSpecies) return null;
+
+	// Determine egg species - always from female parent unless female is Ditto
+	if (femaleSpecies.name === 'Ditto') {
+		// If female is Ditto, egg is male's species
+		return maleSpecies;
+	}
+
+	return femaleSpecies;
+}
+
 // Generate retro sprite inheritance with genetics multipliers
 // - Base behaviour: use retro.js roll logic with pure 1-in-X RETRO_SPRITES
 //   odds (no parent influence).
@@ -306,34 +338,7 @@ function inheritRetroSprite(parent1, parent2, eggSpeciesGen) {
 
 // Create egg from two parents
 function createBreedingEgg(parent1, parent2) {
-	const species1 = pokemonDatabase.find(p => p.id === parent1.id);
-	const species2 = pokemonDatabase.find(p => p.id === parent2.id);
-	
-	// Determine which parent is female
-	let femaleParent;
-	let maleParent;
-	
-	if (parent1.gender === 'Female') {
-		femaleParent = parent1;
-		maleParent = parent2;
-	} else {
-		femaleParent = parent2;
-		maleParent = parent1;
-	}
-	
-	const femaleSpecies = pokemonDatabase.find(p => p.id === femaleParent.id);
-	const maleSpecies = pokemonDatabase.find(p => p.id === maleParent.id);
-	
-	// Determine egg species - always from female parent unless female is Ditto
-	let eggSpecies;
-	if (femaleSpecies.name === 'Ditto') {
-		// If female is Ditto, egg is male's species
-		eggSpecies = maleSpecies;
-	} else {
-		// Otherwise, egg is female's species
-		eggSpecies = femaleSpecies;
-	}
-
+	const eggSpecies = getEggSpeciesFromParents(parent1, parent2);
 	if (!eggSpecies) return null;
 
 	const egg = {
