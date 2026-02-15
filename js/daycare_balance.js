@@ -25,7 +25,7 @@ const DAYCARE_BALANCE = {
 	GENETICS_MULTIPLIERS: {
 		// Shiny inheritance (disabled by setting enabled to false)
 		shiny: {
-			enabled: false,
+			enabled: true,
 			one: 2,         // One parent shiny = 2x odds
 			two: 10         // Both parents shiny = 10x odds
 		},
